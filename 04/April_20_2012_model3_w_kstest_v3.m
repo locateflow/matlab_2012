@@ -8,6 +8,7 @@ ind=1;
 normalized = [];
 norm_all = [];
 
+
 norm_avg = normalized;
 % MODEL 3: This model uses a memory of the last few elements that were
 % used. begin with the 'start' element.
