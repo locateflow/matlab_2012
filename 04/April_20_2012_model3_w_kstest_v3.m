@@ -7,6 +7,9 @@ ind=1;
 % zero memory.
 normalized = [];
 norm_all = [];
+kstat_only = [];
+%%
+
 
 
 norm_avg = normalized;
@@ -162,6 +165,7 @@ for mem_size = 0:15
     end
     mem_size;
     h_p_k2stat;
+    kstat_only(mem_size + 1, :) = mean(h_p_k2stat(:,3));
     h_p_k2stat_all(mem_size + 1,:) = [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
     % forLooking(mem_size,:) =
     % [(h_p_k2stat(:,1)),(h_p_k2stat(:,2)),(h_p_k2stat(:,3))]
@@ -179,16 +183,18 @@ normalized(:,3) = (hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
 mem_size
 %%
 figure
-plot(normalized)
-legend('sum h','avg p value','avg k stat');
+plot(kstat_only)
+% legend('sum h','avg p value','avg k stat');
 
-norm_all(:,:,ind) = normalized;
+kstat_only_all(ind, :) = kstat_only';
+% norm_all(:,:,ind) = normalized;
 ind = ind+1;
-norm_avg = mean(norm_all,3);
-
+% norm_avg = mean(norm_all,3);
+kstat_only_avg = mean(kstat_only_all);
 figure
-plot(norm_avg)
-legend('sum h','avg p value','avg k stat');
+plot(kstat_only_avg)
+% plot(norm_avg)
+% legend('sum h','avg p value','avg k stat');
 title('Average')
 % pause
 
