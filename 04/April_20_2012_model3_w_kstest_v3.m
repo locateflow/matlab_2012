@@ -8,6 +8,7 @@ ind=1;
 normalized = [];
 norm_all = [];
 kstat_only = [];
+ind = 1;
 %%
 
 
@@ -164,21 +165,21 @@ for mem_size = 0:15
         end
     end
     mem_size;
-    h_p_k2stat;
+%     h_p_k2stat;
     kstat_only(mem_size + 1, :) = mean(h_p_k2stat(:,3));
-    h_p_k2stat_all(mem_size + 1,:) = [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
+%     h_p_k2stat_all(mem_size + 1,:) = [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
     % forLooking(mem_size,:) =
     % [(h_p_k2stat(:,1)),(h_p_k2stat(:,2)),(h_p_k2stat(:,3))]
 end
 
-hpk = h_p_k2stat_all;
+% hpk = h_p_k2stat_all;
 
 % I need to keep track of the kstat without normalizing
 
-
-normalized(:,1) = (hpk(:,1)-mean(hpk(:,1)))/std(hpk(:,1));
-normalized(:,2) = (hpk(:,2)-mean(hpk(:,2)))/std(hpk(:,2));
-normalized(:,3) = (hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
+% 
+% normalized(:,1) = (hpk(:,1)-mean(hpk(:,1)))/std(hpk(:,1));
+% normalized(:,2) = (hpk(:,2)-mean(hpk(:,2)))/std(hpk(:,2));
+% normalized(:,3) = (hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
 % normalized(:,3) = hpk(:,3);%(hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
 mem_size
 %%
@@ -197,7 +198,9 @@ plot(kstat_only_avg)
 % legend('sum h','avg p value','avg k stat');
 title('Average')
 % pause
-
+save '2012\05\2012_05_23\May_23_2012'
+%%
+load '2012\05\2012_05_23\May_23_2012'
 %%
 % save '2012\05\May_03_2012'
 %%
