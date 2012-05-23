@@ -194,9 +194,14 @@ ind = ind+1;
 kstat_only_avg = mean(kstat_only_all);
 figure
 plot(kstat_only_avg)
+
+xlim([0 17])
+set(gca,'xtick', 1:16, 'xtickla', 0:16)
 % plot(norm_avg)
 % legend('sum h','avg p value','avg k stat');
-title('Average')
+title('Average K Statistic v. Memory Size')
+ylabel('K Statistic')
+xlabel('Memory Size')
 % pause
 save '2012\05\2012_05_23\May_23_2012'
 %%
