@@ -1,0 +1,10 @@
+    Today I began with the data from January_27_2012.mat.  I resaved some of 
+the variables with more appropriate names.  I changed the data imported
+from google spreadsheet to Data.  I hope other names are self explanatory. 
+At the end of the day I also deleted some of the variables I didn't really 
+use and resaved the data in January_30_2012.mat.  
+    I created 2 figures.  One, NegativeCorrelation.fig is a scatter plot 
+that shows a negative correlation between the frequency of phrase type 1 
+and the frequency of other phrase types (2-6).  All phrase types considered
+begin with the F1 motif.  The second figure is Timeline.fig.  This shows 
+the relative frequency of type 1 vs types 1-6 over time.

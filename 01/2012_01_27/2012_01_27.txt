@@ -1,0 +1,9 @@
+2011 01 27
+Today I imported information from the google spreadsheet called Butcherbird Probabilities.
+These are a sparsified version of songs from Bayliss documented as a sequence of rearrangable
+subunits.  The data is saved here in a .mat file in raw form and some manipulations were made.
+I looked for the time interval between song type 1.  Or first unit F1.  I plotted the time 
+interval between occurrences of type 1 and thought it was increasing as the performance went on.  I thought that at the same time the
+recurrence of subunit F1, which begins type1 remained relatively consistently within other 
+song types.  I need to check if the frequency of other song types containing F1 increases as the 
+frequency of song type 1 decreases.

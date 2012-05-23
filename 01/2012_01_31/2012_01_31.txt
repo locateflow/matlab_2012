@@ -1,0 +1,10 @@
+2012 01 31
+
+Today I set up a way to run through each subunit of Bayliss and display all
+its locations within the matrix of phrases that the bird sings.  This gives 
+me an idea of the distribution of various subunits within the longer 
+performance consisting of several phrases (~256).  At first glance it 
+appears that subunits are strategically placed so that they are used at a 
+consistent phrase to phrase frequency, though the other subunits each is 
+partnered with may vary.
+
