@@ -210,4 +210,11 @@ load '2012\05\2012_05_23\May_23_2012'
 % save '2012\05\May_03_2012'
 %%
 load '2012\05\May_03_2012';% norm_all
-
+%%
+    r = ceil(20*rand(100000000,16));
+%     r = kstat_only_all(
+    for i = 1:16;
+        kso = kstat_only_all(:,i);
+        bootstrapped(:,i) = kso(r(:,i));
+    end
+    plot(mean(bootstrapped))
