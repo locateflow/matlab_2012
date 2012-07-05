@@ -1,0 +1,25 @@
+butcherbird workflow
+
+Find an appropriate sound file.
+Band pass filter approx. 800-2500.
+Remove as much background noise as possible w/o losing the signal.
+use getDataFromWav.m to process the data.
+This outputs a structure with relevent info about the data.
+Use imageButcherBird(struct, 'subsorting') to create an image of the sorted data.
+Use rearrange_image_rows to hand sort the data.
+Print out a sheet with the handsorted data.  Look for reused elements and give them labels.
+
+
+Create a tab in the "Markov Matrix" spreadsheet in google docs.
+Label the tab with the name of the bird.
+Enter the values for the element names to label rows and columns.
+Count the number of occurences in your sorted visualization for each element.
+
+use imageButcherbird(struct, 'raw') to see and hear the songs in natural order.
+In a spreadsheet redefine each phrase as a sequence of the elements you found.
+
+What file helps turn the google docs data into matlab data that can be handled?
+April_17_2012 ?
+
+
+
