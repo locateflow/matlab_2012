@@ -4,6 +4,10 @@ Find an appropriate sound file.
 Band pass filter approx. 800-2500.
 Remove as much background noise as possible w/o losing the signal.
 use getDataFromWav.m to process the data.
+
+The file called March_12_2012 has a process for creating images of the data.
+The structures that contain the data that was already processed are in a mat file called 10_13_2011.mat
+
 This outputs a structure with relevent info about the data.
 Use imageButcherBird(struct, 'subsorting') to create an image of the sorted data.
 Use rearrange_image_rows to hand sort the data.
@@ -17,6 +21,11 @@ Count the number of occurences in your sorted visualization for each element.
 
 use imageButcherbird(struct, 'raw') to see and hear the songs in natural order.
 In a spreadsheet redefine each phrase as a sequence of the elements you found.
+
+What file helps turn the google docs data into matlab data that can be handled?
+April_17_2012 ?
+
+you need the data and a markov matrix
 
 
 
