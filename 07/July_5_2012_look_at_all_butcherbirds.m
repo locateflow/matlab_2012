@@ -1,0 +1,5 @@
+imageButcherbird(HT77,'subsorting');title('HT77');set(gca,'clim',[800,2000])
+imageButcherbird(HT99,'subsorting');title('HT99');set(gca,'clim',[800,2000])
+imageButcherbird(bayliss,'subsorting');title('bayliss');set(gca,'clim',[800,2000])
+imageButcherbird(beasley,'subsorting');title('beasley');set(gca,'clim',[800,2000])
+imageButcherbird(lumsdaine,'subsorting');title('lumsdaine');set(gca,'clim',[800,2000])
