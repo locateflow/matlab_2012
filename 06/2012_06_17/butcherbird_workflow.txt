@@ -23,7 +23,9 @@ use imageButcherbird(struct, 'raw') to see and hear the songs in natural order.
 In a spreadsheet redefine each phrase as a sequence of the elements you found.
 
 What file helps turn the google docs data into matlab data that can be handled?
-April_17_2012 ?
+April_17_2012 ?  Yes, this is a problem.  Importing data that is all numbers and blank cells was difficult with Beasley Data.
+
+If data is just numbers you can do Edit->Paste to Workspace.  No problem.
 
 you need the data and a markov matrix
 
