@@ -22,6 +22,21 @@ pause
     
 end
 %%
+% Go through the file and see where certain amp/freq combos recur.
+% for am = .01:.01:1
+    for fre  = 800:1:2000
+% f = (abs(amp - am) < .1 & abs(freq - fre) < 10);
+f = (abs(freq - fre) < 10);
+
+imagesc(f);
+colormap('bone')
+
+title(num2str(fre))
+pause
+    end
+    
+% end
+%%
 am = reshape(amp, 1, 161*2500);
 fre = reshape(freq, 1, 161*2500);
 
