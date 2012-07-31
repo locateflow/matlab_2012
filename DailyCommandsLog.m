@@ -37,4 +37,36 @@ for i = 1:length(u)
     title(num2str(i));
     pause
 end
+%%
+% Use April_17_2012_v2.m
+
+data2 = A; 
+save '2012/07/2012_07_31/July_31_2012' 
+
+%%
+
+%%
+u = unique(data2);
+markov = zeros(length(u));
+%%
+for i = 1:length(u)
+    u(i)
+    transpose = data2';
+    element_indices = ismember(transpose,u(i));
+    f = find(element_indices==1);
+    if(max(f)==1778)
+        f(f==1778)=1777;
+    end
+    next = transpose(f+1)
+    u_next = unique(next)
+    for j = length(u_next)
+        element_p = sum(ismember(next,u_next(j)))/length(next);
+        markov_col = find(ismember(u,u_next(j)));
+        markov(i,markov_col) = element_p;
+    end
+end
+
+%%
+% opened June_25_2012_make_markov.m
+
 
