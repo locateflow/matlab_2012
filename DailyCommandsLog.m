@@ -24,3 +24,17 @@ imageButcherbird(structr,'subsorting');title('HT99 new');set(gca,'clim',[800,200
 imageButcherbird(HT99,'subsorting');title('HT99 old');set(gca,'clim',[800,2000]); 
 imageButcherbird(structr,'raw');title('HT99 new');set(gca,'clim',[800,2000]); 
 imageButcherbird(HT99,'raw');title('HT99 old');set(gca,'clim',[800,2000]);
+%%
+% A comes from using "Paste to Workspace" command from Edit menu while
+% workspace is active window.  Looking at HT99 data from Markov Matrix
+% google spreadsheet.
+B = A(~isnan(A));
+u = unique(B);
+for i = 1:length(u)
+    thisElement = A == u(i);
+    imagesc(thisElement);
+    colormap('bone');
+    title(num2str(i));
+    pause
+end
+
