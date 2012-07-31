@@ -1,72 +1,52 @@
-load C:\Users\Eathan\Documents\MATLAB\2011\10\10_13_2011.mat HT99
-
-filesFolder = 'Media\Sound\HT99'
-% Get the directory list of the input folder.
-fileList = dir(filesFolder);
-%%
-% Skip the nonsense at the beginning.
-fileList = fileList(3:end);
-% Change the structure to a cell.
-fileListCell = struct2cell(fileList);
-% Nameslist only contains the wav file names.
-namesList = fileListCell(1,:);
-%% fields: original, amplitude, frequency.
-structr = HT99;
-for i = 1:length(namesList)
-structr(i).fileLoc = [filesFolder,'\',cell2mat(namesList(i))];
-wv = wavread(structr(i).fileLoc);
-% Regularize the data so that the vector's range extends from -1 to 1.
-wv = wavesc(wv);
-structr(i).original = (wv(:,1));
-end
-%%
-imageButcherbird(structr,'subsorting');title('HT99 new');set(gca,'clim',[800,2000]); 
-imageButcherbird(HT99,'subsorting');title('HT99 old');set(gca,'clim',[800,2000]); 
-imageButcherbird(structr,'raw');title('HT99 new');set(gca,'clim',[800,2000]); 
-imageButcherbird(HT99,'raw');title('HT99 old');set(gca,'clim',[800,2000]);
-%%
-% A comes from using "Paste to Workspace" command from Edit menu while
-% workspace is active window.  Looking at HT99 data from Markov Matrix
-% google spreadsheet.
-B = A(~isnan(A));
-u = unique(B);
-for i = 1:length(u)
-    thisElement = A == u(i);
-    imagesc(thisElement);
-    colormap('bone');
-    title(num2str(i));
-    pause
-end
-%%
-% Use April_17_2012_v2.m
-
-data2 = A; 
-save '2012/07/2012_07_31/July_31_2012' 
 
 %%
-
+% opened June_25_2012_make_markov.m
 %%
+data2 = A;
+data2(isnan(data2)) = 1000;
+data2(:,1) = 100;
 u = unique(data2);
 markov = zeros(length(u));
 %%
 for i = 1:length(u)
+    % Choose the ith element of u;
+
     u(i)
     transpose = data2';
+    % Find which slots this element occupies within the performance.
     element_indices = ismember(transpose,u(i));
     f = find(element_indices==1);
-    if(max(f)==1778)
-        f(f==1778)=1777;
+    % Get the dimensions of the matrix.
+    [height, width] = size(data2);
+    % Make special considerations for the final element.
+    if(max(f)== height * width)
+        f(end) = height * width - 1;
     end
+    % Next holds all of the elements following u(i).
     next = transpose(f+1)
+    % There may be one or several of them, and they may be used multiple times.
     u_next = unique(next)
-    for j = length(u_next)
-        element_p = sum(ismember(next,u_next(j)))/length(next);
+    % Go through each unique element.
+    for j = 1:length(u_next)
+        % Choose the jth element.
+        u_next(j)
+        % How of the jth element follow the u(i)?
+        numerator = sum(ismember(next,u_next(j)))
+        % How many times is u(i) used?
+        denominator = length(next)
+        % 'element_p' is the probability that the jth element follows u(i).
+        element_p = numerator/denominator;
+        % Find which column of the markov matrix represents the jth
+        % element.
         markov_col = find(ismember(u,u_next(j)));
+        % Row i, column markov_col is the probability that the jth element
+        % comes after u(i).
         markov(i,markov_col) = element_p;
+        
     end
 end
-
 %%
-% opened June_25_2012_make_markov.m
+% markov(25,25:26)=[0,1];
+save 2012\07\2012_07_31\July_31_2012.mat A data2 markov u -append
 
 
