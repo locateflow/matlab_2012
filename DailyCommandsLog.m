@@ -48,5 +48,49 @@ end
 %%
 % markov(25,25:26)=[0,1];
 save 2012\07\2012_07_31\July_31_2012.mat A data2 markov u -append
+%%
+current_element = 100;
+s = 0;
+generative = data2;
+generative(:) = 10000;
+%%
+% Data = data2;
 
+Data = generative(:,1:6);
+data = Data;
+subunits = {};
+counter = 0;
+for j = 2:length(data(1,:))
+    for i = 1:length(data(:,1))
+
+            
+        this = Data(i,j);
+        i
+        j
+                % Make sure you haven't already seen this distribution.
+                if sum(ismember(subunits, this))<1;
+            % Add this element to the list of already seen.
+            subunits(counter+1) = this;
+            counter = counter+1;
+%         others = Data(i+1:end,j);
+        same = ismember(Data,this);
+        same = same+same;
+        same(i,j)=4;
+        subplot(1,10,2:5)
+
+        imagesc(same);
+        title(['row ', num2str(i),' col ', num2str(j), ' ', this])
+        subplot(1,10,1)
+        imagesc(sum(same,2))
+%         title(['row ', num2str(i),' col ', num2str(j), ' ', this])
+subplot(1,10,6:9)
+ismem = ismember(data2(:,2:7),this);
+imagesc(ismem);
+subplot(1,10,10)
+imagesc(sum(ismem,2))
+        pause
+        end
+    end
+end
+%temp
 
