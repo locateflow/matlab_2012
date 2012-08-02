@@ -47,7 +47,9 @@ for i = 1:length(u)
 end
 %%
 % markov(25,25:26)=[0,1];
-save 2012\07\2012_07_31\July_31_2012.mat A data2 markov u -append
+% save 2012\07\2012_07_31\July_31_2012.mat A data2 markov u -append
+load 2012\07\2012_07_31\July_31_2012.mat 
+
 %%
 current_element = 100;
 s = 0;
@@ -56,9 +58,9 @@ generative(:) = 10000;
 %%
 % Data = data2;
 
-Data = generative(:,1:6);
+Data = generative;%(:,1:6);
 data = Data;
-subunits = {};
+subunits = [];
 counter = 0;
 for j = 2:length(data(1,:))
     for i = 1:length(data(:,1))
@@ -67,7 +69,12 @@ for j = 2:length(data(1,:))
         this = Data(i,j);
         i
         j
-                % Make sure you haven't already seen this distribution.
+                % Make sure you haven't already seen this distribution. WTF
+                % do I mean by distribution????  aha, I mean distribution
+                % of this element!  Don't show me an element's distribution
+                % twice!
+                % add up the number of times 'this' appears in the "array"
+                % called 'subunits'
                 if sum(ismember(subunits, this))<1;
             % Add this element to the list of already seen.
             subunits(counter+1) = this;
@@ -84,12 +91,13 @@ for j = 2:length(data(1,:))
         imagesc(sum(same,2))
 %         title(['row ', num2str(i),' col ', num2str(j), ' ', this])
 subplot(1,10,6:9)
-ismem = ismember(data2(:,2:7),this);
+ismem = ismember(data2(:,2:length(data2(1,:))),this);
 imagesc(ismem);
 subplot(1,10,10)
 imagesc(sum(ismem,2))
-        pause
-        end
+       
+                end
+         pause
     end
 end
 %temp
