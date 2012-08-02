@@ -1,23 +1,14 @@
 
 load 2012\07\2012_07_31\July_31_2012.mat 
 
-%%
-% I need to reset the size of 'normalized' and 'norm_all' to account for
-% zero memory.
 mem_size = 0;
-normalized = [];
-norm_all = [];
 kstat_only = [];
 ind = 1;
 j=0;
 %%
 
-
-
-norm_avg = normalized;
 % MODEL 3: This model uses a memory of the last few elements that were
 % used. begin with the 'start' element.
-h_p_k2stat_all = [];
 % forLooking = [];
 for mem_size = 0:15
     current_element = 100; % current_element = {'start'};
@@ -33,9 +24,7 @@ for mem_size = 0:15
     memory = u(1:mem_size+3);
     % the array is empty to start with.
     memory(:) = NaN; % memory(:) = {''};
-    
-    
-    
+ 
     for i = 1:length(data2(:,1));
         % i changes when the current row is filled with elements.
         i
@@ -46,10 +35,10 @@ for mem_size = 0:15
         current_element = 100; % current_element = {'start'};
         % we can fill the row until the next probabalistically determined
         % element is 'end'
-        while ~ismember(current_element, 1000)
+        while ~ismember(current_element, 1000)% as long as you haven't reached 'end'=1000
             % f gives you the index of the current element within u.
             f = find(ismember(u, current_element));
-            u(f)
+            u(f)% tells you the current element
             
             
             % s will be used to keep track of the sum of possible
@@ -59,19 +48,16 @@ for mem_size = 0:15
             j=1;
             % roll the dice.
             r = rand(1);
-            % j grows until we go through each unique element.
+            % j grows until we go through each unique element, or until we
+            % choose an element.
             while j < length(u) % while j <= length(u)
-                
-                
-                %             s = s + markov(f,j);
-                
+     
                 % s2 checks the probability of the next element of u (u
                 % contains unique elements)
+                % markov(f,j) holds the probability that u(f) will be
+                % followed by u(j).
                 s2 = s + markov(f, j);
-                %             end
-                
-                
-                
+            
                 if r >= s & r < s2 & j<length(u)+1
                     % check if u(j), the currently selected element, is in
                     % the memory. if not continue and current element =
@@ -106,8 +92,6 @@ for mem_size = 0:15
                     %             if j<26
                     s2 = s + markov(f, j);
                 end
-                
-                
             end
         end
     end
@@ -169,30 +153,19 @@ for mem_size = 0:15
     mem_size;
 %     h_p_k2stat;
     kstat_only(mem_size + 1, :) = mean(h_p_k2stat(:,3));
-%     h_p_k2stat_all(mem_size + 1,:) = [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
+%     (mem_size + 1,:) = [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
     % forLooking(mem_size,:) =
     % [(h_p_k2stat(:,1)),(h_p_k2stat(:,2)),(h_p_k2stat(:,3))]
 end
 
-% hpk = h_p_k2stat_all;
-
-% I need to keep track of the kstat without normalizing
-
-% 
-% normalized(:,1) = (hpk(:,1)-mean(hpk(:,1)))/std(hpk(:,1));
-% normalized(:,2) = (hpk(:,2)-mean(hpk(:,2)))/std(hpk(:,2));
-% normalized(:,3) = (hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
-% normalized(:,3) = hpk(:,3);%(hpk(:,3)-mean(hpk(:,3)))/std(hpk(:,3));
-mem_size
 %%
 figure
 plot(kstat_only)
 % legend('sum h','avg p value','avg k stat');
 
 kstat_only_all(ind, :) = kstat_only';
-% norm_all(:,:,ind) = normalized;
+
 ind = ind+1;
-% norm_avg = mean(norm_all,3);
 kstat_only_avg = mean(kstat_only_all);
 figure
 plot(kstat_only_avg)
@@ -205,19 +178,6 @@ title('Average K Statistic v. Memory Size')
 ylabel('K Statistic')
 xlabel('Memory Size')
 % pause
-save '2012\05\2012_06_26\June_26_2012'
-%%
-load '2012\05\2012_06_26\June_26_2012'
-%%
-% save '2012\05\May_03_2012'
-%%
-load '2012\05\May_03_2012';% norm_all
-%%
-    r = ceil(20*rand(100000000,16));
-%     r = kstat_only_all(
-    for i = 1:16;
-        kso = kstat_only_all(:,i);
-        bootstrapped(:,i) = kso(r(:,i));
-    end
-    plot(mean(bootstrapped))
+
+
 
