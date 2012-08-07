@@ -11,7 +11,7 @@ j=0;
 % MODEL 3: This model uses a memory of the last few elements that were
 % used. begin with the 'start' element. forLooking = [];
 
-for mem_size = 0:15
+for mem_size = 0:2%0:15
     current_element = 100; % current_element = {'start'};
     
     % s will be used to keep track of the sum of possible transition
@@ -38,27 +38,36 @@ for mem_size = 0:15
         current_element = 100; % current_element = {'start'};
         % we can fill the row until the next probabalistically determined
         % element is 'end'
-        while ~ismember(current_element, 1000)% as long as you haven't reached 'end'=1000
+        while ~ismember(current_element, 1000) & sequence_num ~= length(data2(1,:))% as long as you haven't reached 'end'=1000
             % f gives you the index of the current element within u.
             f = find(ismember(u, current_element));
-            u(f)% tells you the current element
+            output = u(f)% tells you the current element
             
-             pause
+%              pause
             % 's' will be used to keep track of the sum of possible
             % transition probability values. if r lies between s and s2
             % then we pick the next element according to
             s = 0; s2 = 0;
             j=1;
             % roll the dice.
-            r = rand(1);
+            r = rand(1)
             % j grows until we go through each unique element, or until we
             % choose an element.
-            while j < length(u) % while j <= length(u)
+            
+            nextChoicesChances = markov(f,:);
+            nextChoices = u(find(nextChoicesChances > 0))            
+            nextChoicesChances = nextChoicesChances(find(nextChoicesChances > 0))
+            outp = cumsum(nextChoicesChances)%-nextChoicesChances
+            
+%             while j < length(u) % while j <= length(u)
+            while j <= length(nextChoicesChances)
+
                 
                 % s2 checks the probability of the next element of u (u
                 % contains unique elements) markov(f,j) holds the
                 % probability that u(f) will be followed by u(j).
-                s2 = s + markov(f, j);
+%                 s2 = s + markov(f, j)
+                s2 = s + nextChoicesChances(j)
                 % if r is between s and s2 then u(j) could be the next
                 % element unless....
                 if r >= s & r < s2 & j<length(u)+1% why noy j<= without +1?
@@ -68,8 +77,10 @@ for mem_size = 0:15
                     % if u(j) is in the memory buffer. if not then
                     % continue. Or if the probability of u(f) going to u(j)
                     % is certain then don't stress out, just use u(j).
-                    if sum(ismember(memory(1:mem_size+1), u(j)))<1 | markov(f,j)==1
-                        current_element = u(j);
+%                     if sum(ismember(memory(1:mem_size+1), u(j)))<1 | markov(f,j)==1
+                    if sum(ismember(memory(1:mem_size+1), nextChoices(j)))<1 | nextChoicesChances(j)==1
+
+                        current_element = nextChoices(j);
                         
                         %                 pause m = markov; m(f,j+1)=2;
                         %                 imagesc(m) pause
@@ -77,6 +88,9 @@ for mem_size = 0:15
                         generative(i,sequence_num) = current_element;
                         % prepare to fill the following slot.
                         sequence_num = sequence_num+1;
+                        if sequence_num == length(data2(1,:))
+                            generative(i,sequence_num) = 1000;
+                        end
                         % if you haven't just drawn an 'end' element or a
                         % 'start' element...
                         if ~isequal(1000,current_element) & ~isequal(100,current_element)
@@ -111,7 +125,7 @@ for mem_size = 0:15
     end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % now that you have filled the generative modeling for that memory size...
-% start and end elements 100, adn 1000 should not be in the generative mat.
+% start and end elements 100, and 1000 should not be in the generative mat.
 % Hmm... what happens if you reach the last column and it says there's
 % still room for more elements?
     % Make sure the size of the model data matrix is the same size as the
@@ -154,8 +168,7 @@ for mem_size = 0:15
                 %         subplot(2,10,16:20) hist(diff(fn2),10) ylim([0
                 %         30]) xlim([0 25])
                 if(length(fn1)>1)
-                    [h,p,ks2stat] = kstest2(diff(fn1),diff(fn2));
-                    h_p_k2stat = [h_p_k2stat;[h,p,ks2stat]];
+
                     %         figure(fig2); A = cdfplot(diff(fn1)); set(A,
                     %         'color', 'r');hold on;
                     %         cdfplot(diff(fn2));hold off
@@ -165,12 +178,7 @@ for mem_size = 0:15
         end
     end
     mem_size;
-    %     h_p_k2stat;
-    kstat_only(mem_size + 1, :) = mean(h_p_k2stat(:,3));
-    %     (mem_size + 1,:) =
-    %     [sum(h_p_k2stat(:,1)),mean(h_p_k2stat(:,2)),mean(h_p_k2stat(:,3))];
-    % forLooking(mem_size,:) =
-    % [(h_p_k2stat(:,1)),(h_p_k2stat(:,2)),(h_p_k2stat(:,3))]
+
 end
 
 %%
