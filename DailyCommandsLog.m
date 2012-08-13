@@ -11,7 +11,7 @@ j=0;
 % MODEL 3: This model uses a memory of the last few elements that were
 % used. begin with the 'start' element. forLooking = [];
 
-for mem_size = 0:2%0:15
+for mem_size = 4:6%0:15
     current_element = 100; % current_element = {'start'};
     
     % s will be used to keep track of the sum of possible transition
@@ -55,9 +55,16 @@ for mem_size = 0:2%0:15
             % choose an element.
             
             nextChoicesChances = markov(f,:);
-            nextChoices = u(find(nextChoicesChances > 0))            
+            nextChoices = u(find(nextChoicesChances > 0)) 
+            choicesLeft = ~ismember(nextChoices, memory);
+            
             nextChoicesChances = nextChoicesChances(find(nextChoicesChances > 0))
-            outp = cumsum(nextChoicesChances)%-nextChoicesChances
+            nextChoices = nextChoices(choicesLeft);
+            if norm(nextChoicesChances(choicesLeft)) ~= 1;
+            nextChoicesChances = nextChoicesChances(choicesLeft);
+            nextChoicesChances = nextChoicesChances/norm(nextChoicesChances);
+            end
+
             
 %             while j < length(u) % while j <= length(u)
             while j <= length(nextChoicesChances)
@@ -139,7 +146,7 @@ for mem_size = 0:2%0:15
             this = Data(i,j);
             i;
             j;
-            % Make sure you haven't already seen the distribution fo this element.
+            % Make sure you haven't already seen how this element is distributed.
             if sum(ismember(subunits, this))<1;
                 % Add this element to the list of already seen.
                 subunits(counter+1) = this;
@@ -151,27 +158,30 @@ for mem_size = 0:2%0:15
                 same = same+same;
                 % show the first occurance of the element a bit darker.
                 same(i,j)=4;
-%                         subplot(2,10,2:5)
-%                 
-%                         imagesc(same); title(['row ', num2str(i),' col ',...
-%                         num2str(j), ' ', this]); subplot(2,10,1);
-%                         imagesc(sum(same,2))
-%                         pause
+                        subplot(2,10,2:5)
+                
+                        imagesc(same); title(['row ', num2str(i),' col ',...
+                        num2str(j), ' ', this]); subplot(2,10,1);
+                        imagesc(sum(same,2))
+                        
                 ss = sum(same,2); fn1 = find(ss~=0);
-                %         subplot(2,10,11:15) hist(diff(fn1),10) ylim([0
-                %         30]) xlim([0 25]) title(['row ', num2str(i),' col
-                %         ', num2str(j), ' ', this])
-                % subplot(2,10,6:9)
-                ismem = ismember(data2(:,2:7),this);
-                % imagesc(ismem); subplot(2,10,10) imagesc(sum(ismem,2))
+                        subplot(2,10,11:15) 
+                        hist(diff(fn1),10) 
+                        ylim([0 30]); xlim([0 25]) 
+                        title(['row ', num2str(i),' col', num2str(j), ' ', this])
+                       
+                subplot(2,10,6:9)
+                ismem = ismember(data2,this);
+                imagesc(ismem); subplot(2,10,10); imagesc(sum(ismem,2))
                 ss = sum(ismem,2); fn2 = find(ss~=0);
-                %         subplot(2,10,16:20) hist(diff(fn2),10) ylim([0
-                %         30]) xlim([0 25])
+                        subplot(2,10,16:20); hist(diff(fn2),10); ylim([0 ...
+                        30]); xlim([0 25])
                 if(length(fn1)>1)
 
-                    %         figure(fig2); A = cdfplot(diff(fn1)); set(A,
-                    %         'color', 'r');hold on;
-                    %         cdfplot(diff(fn2));hold off
+%                             figure(fig2); A = cdfplot(diff(fn1)); set(A,...
+%                             'color', 'r');hold on;
+%                             cdfplot(diff(fn2));hold off
+                            pause
                 end
                 %         pause
             end
@@ -200,6 +210,19 @@ title('Average K Statistic v. Memory Size')
 ylabel('K Statistic')
 xlabel('Memory Size')
 % pause
+%%
+elementsInOrder = data2(data2 ~= 100)';
+elementsInOrder = elementsInOrder(elementsInOrder ~= 1000);
+for i = 1:length(u)
+    d = diff(find(elementsInOrder == u(i)));
+    hist(d,1000);
+    title(num2str(u(i)))
+    xlim([0 25])
+  
+    pause
+end
+
+
 
 
 
