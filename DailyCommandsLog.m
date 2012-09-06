@@ -213,14 +213,32 @@ xlabel('Memory Size')
 %%
 elementsInOrder = data2(data2 ~= 100)';
 elementsInOrder = elementsInOrder(elementsInOrder ~= 1000);
-for i = 1:length(u)
+d_all = [];
+for i = 1:length(u)-2
     d = diff(find(elementsInOrder == u(i)));
+    d_all = [d_all, d];
     hist(d,1000);
-    title(num2str(u(i)))
+    title([num2str(u(i)), ' - ', num2str(mean(d))])
     xlim([0 25])
   
     pause
 end
+%%
+    hist(d_all, 10000);
+    title([num2str(u(i)), ' - ', num2str(mean(d))])
+    xlim([0 100])
+%%  
+    uniq = unique(d_all);
+    u_size = length(uniq);
+    N = length(d_all);
+    
+    for i = 1:u_size
+    p_vals(i) = sum(d_all == uniq(i))/N;
+    end
+%%
+plot(uniq,p_vals, '.-');
+    
+    
 
 
 
