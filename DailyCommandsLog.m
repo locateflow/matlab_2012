@@ -37,7 +37,8 @@ for mem_size = 4:6%0:15
         % we need to start somewhere.  Start with 'start' on each new i.
         current_element = 100; % current_element = {'start'};
         % we can fill the row until the next probabalistically determined
-        % element is 'end'
+        % element is 'end' aka '1000'
+       
         while ~ismember(current_element, 1000) & sequence_num ~= length(data2(1,:))% as long as you haven't reached 'end'=1000
             % f gives you the index of the current element within u.
             f = find(ismember(u, current_element));
@@ -64,6 +65,10 @@ for mem_size = 4:6%0:15
             nextChoicesChances = nextChoicesChances(choicesLeft);
             nextChoicesChances = nextChoicesChances/norm(nextChoicesChances);
             end
+            if nextChoicesChances == 1
+                generative(i,sequence_num) = nextChoices;
+                sequence_num = sequence_num+1;
+            else
 
             
 %             while j < length(u) % while j <= length(u)
@@ -127,6 +132,7 @@ for mem_size = 4:6%0:15
                     %             if j<26
                     s2 = s + markov(f, j);
                 end
+            end
             end
         end
     end
