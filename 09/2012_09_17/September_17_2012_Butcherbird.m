@@ -1,6 +1,7 @@
 load 2012\07\2012_07_31\July_31_2012.mat
 %%
-mem_size = 10;
+%%
+for mem_size = 1:15
 % The number '100' signifies the 'start' element.
 current_element = 100;
 % The generative model is constrained by the size of the original data.
@@ -9,7 +10,7 @@ generative = data2;
 generative(:) = 1000;
 memory = u(1:mem_size);
 memory(:) = NaN;
-%%
+
 memory(:) = NaN;
 current_element = 100;
 for i = 1:length(data2(:,1))
@@ -40,7 +41,6 @@ for i = 1:length(data2(:,1))
                             memory(1:mem_size-1)=memory(2:mem_size); memory(1) = current_element;
                         end
         else
-%         nextChoicesChances = nextChoicesChancesAll(find(nextChoicesChancesAll > 0 ))
         nextChoices = nextChoicesAll(choicesLeft)
         nextChoicesChances = nextChoicesChancesAll(choicesLeft)
         nextChoicesChances = nextChoicesChances/sum(nextChoicesChances)
@@ -54,6 +54,13 @@ for i = 1:length(data2(:,1))
         end
         
     end
+end
+figure
+generative(generative == 1000) = -1;
+generative(generative == 100) = -1;
+imagesc(generative)
+title(['memory size = ', num2str(mem_size)])
+pause
 end
             
             
