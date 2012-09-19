@@ -40,9 +40,9 @@ for i = 1:length(data2(:,1))
                             memory(1:mem_size-1)=memory(2:mem_size); memory(1) = current_element;
                         end
         else
-        nextChoicesChances = nextChoicesChancesAll(find(nextChoicesChancesAll > 0 ))
-        nextChoices = nextChoicesAll(choicesLeft);
-        nextChoicesChances = nextChoicesAll(choicesLeft);
+%         nextChoicesChances = nextChoicesChancesAll(find(nextChoicesChancesAll > 0 ))
+        nextChoices = nextChoicesAll(choicesLeft)
+        nextChoicesChances = nextChoicesChancesAll(choicesLeft)
         nextChoicesChances = nextChoicesChances/sum(nextChoicesChances)
         choiceIndex = min(find(r <= cumsum(nextChoicesChances)))
         current_element = nextChoices(choiceIndex)
