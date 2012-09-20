@@ -57,9 +57,11 @@ for mem_size = 4:6%0:15
             
             nextChoicesChances = markov(f,:);
             nextChoices = u(find(nextChoicesChances > 0)) 
-            choicesLeft = ~ismember(nextChoices, memory);
+            choicesLeft = ~ismember(nextChoices, memory)
             
-            nextChoicesChances = nextChoicesChances(find(nextChoicesChances > 0))
+%             nextChoicesChances = nextChoicesChances(find(nextChoicesChances > 0))
+            nextChoicesChances = nextChoicesChances(choicesLeft)
+
             nextChoices = nextChoices(choicesLeft);
             if norm(nextChoicesChances(choicesLeft)) ~= 1;
             nextChoicesChances = nextChoicesChances(choicesLeft);
