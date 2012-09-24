@@ -1,62 +1,9 @@
-09/20/2012
-Yesterday, Ofer and I met with Lucas.  We decided on a plan of how to proceed
-with the butcherbird data.
-
-Ofer summarized his idea of some statements we may want to express in a paper.
-
-1. Using spike sorting we can classify elements.
-2. We see that those elements are being reused across different phrases.    
-3. We hav an alternative representation of what people are currently saying.
-    
-Typically people would say each bird has X phrase types.  We are saying 
-the singing is more accurately represented as a number of elements that are
-used to improvise phrases.  Indeed, when we look at phrases we don't find 
-any regularity, but when we look at elements we see regularity in the fact 
-that the distribution of the elements appears to be uniform.  This indicates
-that there is memory.  This means that the bird has a mechanism of balancing
-the distribution of elements within a performance consisting of several phrases.
-
-Lucas offered that, given that we can support these statements, the next 
-step would be to create a generative model.  However, he expressed doubt 
-about working to heavily on the development of our own model.  He indicated
-that others may easily come up with different models that produce the same 
-result as ours.  The following debate about which model to choose may not be 
-worth taking part in.
-
-Ofer playing devil's advocate -- what will people say?
-What are we rejecting?  A bigram model?
-
-I suggested that the typical assumption that the bird has a collection of 
-phrases could be highlighted from the beginning of the paper.  Subsequently 
-it is interesting to show that a collection of phrases does not as efficiently
-explain the sequence of the performance.  The elements appear to be more
-useful for that.
-
-There is a memory that is particular to the element and taking this memory 
-into account is what explains the structure of the singing.
-
-All you need to know is the frequency of those conditional distributions and
-another factor which we call memory.
-
-Ofer: Everyone knows that those birds don't sing randomly. So proving that will 
-throw us out of the stairs.
-
-Can we show that the phrases are more random that
-
-Ofer: Everyone knows that the phrase is stereotyped and the phrase order is random. 
-
-Lucas's homework:  Figure out that transition matrix for phrases.  See if
-it's uniform.  As you look at it in time you get these more poisson like, 
-irregular patterns.  
-
-Markov matrix for phrases and next to it, the markov matrix for elements.
-
-Lucas is puzzled by trying to establish a frequency of elements across phrases.
-You are looking at it as though there is no structure in the phrase.  Does it
-make sense to generate the across phrase probabilies using within phrase
-probabilities.  Either us entirely within or entirely across phrases.
-
-Ofer said: we should meet much more often.  And come with printed homework one for each of us.
-
-
-
+9/24/2012
+I have been collecting relavent data for all six butcherbirds.  Particularly
+I had still been searching for Bayliss data.  I found it in two places.  
+I found it in a google doc called Butcherbird Probabilities.  And now I found
+it in a mat file: 
+('C:\Users\Eathan\Documents\MATLAB\2012\04\April_18_2012.mat')
+This file along with loading the appropriate data gives the graph of different
+k statistics vs memory lengths using Bayliss:
+C:\Users\Eathan\Documents\MATLAB\2012\04\April_20_2012_model3_w_kstest_v3.m

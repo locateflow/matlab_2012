@@ -1,35 +1,20 @@
-load 2011/10/10_13_2011
+% loaded C:\Users\Eathan\Documents\MATLAB\2012\09\ElementStructureForAllSixBirds.mat
+load('C:\Users\Eathan\Documents\MATLAB\2012\04\April_18_2012.mat')
 %%
-figure
-imageButcherbird(HT77,'raw');title('HT77');set(gca,'clim',[800,2000])
-figure
-imageButcherbird(HT99,'raw');title('HT99');set(gca,'clim',[800,2000])
-figure
-imageButcherbird(bayliss,'raw');title('Bayliss');set(gca,'clim',[800,2000])
-figure
-imageButcherbird(beasley,'raw');title('Beasley');set(gca,'clim',[800,2000])
-figure
-imageButcherbird(lumsdaine,'raw');title('Lumsdaine');set(gca,'clim',[800,2000])
+intermediateA = data2(:,1);
+intermediateB = data2(:, 2:end);
+sz = size(intermediateB)
+Bayliss = zeros(sz);
+for i = 1:length(u)
+    Bayliss(ismember(intermediateB, u(i))) = i;
+end
 %%
-%% opened C:\Users\Eathan\Documents\MATLAB\2012\06\06_13_2012 Powys_unsorted.fig
-title('Powys')
-
-%% opened C:\Users\Eathan\Documents\MATLAB\2012\06\06_13_2012 Powys_hand_sorted.fig
-title('Powys Hand Sorted')
-
-% C:\Users\Eathan\Documents\MATLAB\2012\07\...
-%     beasley_handSorted.fig
-title('Beasley')
-%     HT99_handSorted.fig
+s2n = cell2mat(intermediateA);
+for i = 1:length(intermediateA)
+    intermediateA(i) = str2num(intermediateA(i));
+end
 %%
-% opened C:\Users\Eathan\Documents\MATLAB\2012\06\New folder\hand_sorted.fig
-set(gca,'clim',[800,2000])
-title('HT77')
+Bayliss(Bayliss == 25) = NaN;
+% copying and pasting data from google sheet
 %%
-% opened E:\C\Users\SongBird\Documents\MATLAB (from old computer)
-set(gca,'clim',[800,2000])
-title('Lumsdaine')
-%%
-load('C:\Users\Eathan\Documents\MATLAB\2012\09\2012_09_17\September_19_2012.mat')
-%% Then I deleted unnecessary variables and saved in a special folder.
-save 2012\09\ElmentStructureForAllSixBirds
+Bayliss = [Bayliss(:,end), Bayliss(:,1:end-1)];
