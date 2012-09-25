@@ -1,20 +1,53 @@
-% loaded C:\Users\Eathan\Documents\MATLAB\2012\09\ElementStructureForAllSixBirds.mat
-load('C:\Users\Eathan\Documents\MATLAB\2012\04\April_18_2012.mat')
+load('C:\Users\Eathan\Documents\MATLAB\2012\09\ElmentStructureForAllSixBirds.mat')
 %%
-intermediateA = data2(:,1);
-intermediateB = data2(:, 2:end);
-sz = size(intermediateB)
-Bayliss = zeros(sz);
-for i = 1:length(u)
-    Bayliss(ismember(intermediateB, u(i))) = i;
+
+% Assign the matrix you want to analyze.
+elementMat = Powys;
+
+% Get an idea of the total number of elements.
+allElementCount = sum(~isnan(elementMat));
+% Get a list of all the elements used, including repetitions.
+arrayFromMat = elementMat(:,2:end);
+arrayFromMat = arrayFromMat(~isnan(arrayFromMat));
+% Find the frequency of each element.
+[M F] = mode(arrayFromMat);
+% Pick the one used closest to 5 percent of the time.
+TABLE1 = tabulate(arrayFromMat);
+hist(TABLE1(:,3))
+%%
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys'};
+allElementFreqs = [];
+for i = 1:length(birdNames)
+    allElementFreqs = [allElementFreqs; findElementDistributionPatternHelper1(eval(cell2mat(birdNames(i))),birdNames(i))]
 end
+
 %%
-s2n = cell2mat(intermediateA);
-for i = 1:length(intermediateA)
-    intermediateA(i) = str2num(intermediateA(i));
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys'};
+for i = 1:length(birdNames)
+    findElementDistributionPatternHelper2(eval(cell2mat(birdNames(i))))
+    pause
 end
+
 %%
-Bayliss(Bayliss == 25) = NaN;
-% copying and pasting data from google sheet
+viewElementDistributions(Powys,'Powys (Original Data)')
 %%
-Bayliss = [Bayliss(:,end), Bayliss(:,1:end-1)];
+viewElementDistributions(Bayliss,'Bayliss (Original Data)')
+%%
+viewElementDistributions(Beasley,'Beasley (Original Data)')
+%%
+viewElementDistributions(HT77,'HT77 (Original Data)')
+%%
+viewElementDistributions(HT99,'HT99 (Original Data)')
+%%
+viewElementDistributions(Lumsdaine,'Lumsdaine (Original Data)')
+
+
+
+
+       
+    
+
+
+
+
+
