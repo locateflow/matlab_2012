@@ -41,6 +41,17 @@ viewElementDistributions(HT99,'HT99 (Original Data)')
 %%
 viewElementDistributions(Lumsdaine,'Lumsdaine (Original Data)')
 
+%%
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys'};
+nameExtension = 'MarkovMat1';
+
+for i = 1:length(birdNames)
+    eval([cell2mat(birdNames(i)), nameExtension, ' = makeMarkovFromElementMat(', cell2mat(birdNames(i)), ')']);
+end
+
+
+
+
 
 
 
