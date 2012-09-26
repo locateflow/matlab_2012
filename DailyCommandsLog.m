@@ -49,6 +49,30 @@ for i = 1:length(birdNames)
     eval([cell2mat(birdNames(i)), nameExtension, ' = makeMarkovFromElementMat(', cell2mat(birdNames(i)), ')']);
 end
 
+%%
+
+% found a hand sorted file for Bayliss.
+set(gca,'clim',[800,2000]) 	
+title('Bayliss')
+
+%%
+BaylissModel1 = markovModel(BaylissMarkovMat1, Bayliss);
+viewElementDistributions(BaylissModel1, 'Bayliss (1st Markov Model)')
+%%
+BeasleyModel1 = markovModel(BeasleyMarkovMat1, Beasley);
+viewElementDistributions(BeasleyModel1, 'Beasley (1st Markov Model)')
+%%
+HT77Model1 = markovModel(HT77MarkovMat1, HT77);
+viewElementDistributions(HT77Model1, 'HT77 (1st Markov Model)')
+%%
+HT99Model1 = markovModel(HT99MarkovMat1, HT99);
+viewElementDistributions(HT99Model1, 'HT99 (1st Markov Model)')
+%%
+LumsdaineModel1 = markovModel(LumsdaineMarkovMat1, Lumsdaine);
+viewElementDistributions(LumsdaineModel1, 'Lumsdaine (1st Markov Model)')
+%%
+PowysModel1 = markovModel(PowysMarkovMat1, Powys);
+viewElementDistributions(PowysModel1, 'Powys (1st Markov Model)')
 
 
 

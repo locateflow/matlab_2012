@@ -1,9 +1,33 @@
-9/24/2012
-I have been collecting relavent data for all six butcherbirds.  Particularly
-I had still been searching for Bayliss data.  I found it in two places.  
-I found it in a google doc called Butcherbird Probabilities.  And now I found
-it in a mat file: 
-('C:\Users\Eathan\Documents\MATLAB\2012\04\April_18_2012.mat')
-This file along with loading the appropriate data gives the graph of different
-k statistics vs memory lengths using Bayliss:
-C:\Users\Eathan\Documents\MATLAB\2012\04\April_20_2012_model3_w_kstest_v3.m
+9/26/2012
+
+Found the hand sorted data for Bayliss!  It was here on the 
+external hardrive with files from the old vaio laptop:
+E:\C\Users\SongBird\Documents\MATLAB\3_16_2012\Bayliss_clustered
+
+I had a meeting with Ofer and Lucas.  Here are the tasks that we decided upon
+pursuing:
+
+1. Plot a histogram of inter-phrase intervals for each element.  Then compare that
+with the histogram of the IPI for each element in the model.
+
+2. We want to show that the element distribution shows more structure than the
+phrase distribution.  Make barcode plots for the phrase distributions.  Compare
+that with original data.
+
+3. Make a Markov model that takes into account phrases.  interphrase interval
+is zero when and element is used twice within a phrase.
+
+Perhaps the coefficient of variation will be lower for the elements than the 
+phrases?
+
+
+Because more regular than exponential must be a memory???
+
+Label phrases and make a transition matrix.
+
+Work on:
+
+Comparing the distribution of interphrase intervals for several elements/
+Look at a way to exhibit the full phrase reusage in the same sort of barcode plot.
+
+
