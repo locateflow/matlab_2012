@@ -1,18 +1,16 @@
-function markov = makeMarkovFromElementMat(elementMat)
-data2 = elementMat;
-data2(isnan(data2)) = 1000;
-data2(:,1) = 100;  % This gets rid of the phrase numbers.
-u = unique(data2);
+function markov = makePhraseMarkovFromElementMat(elementMat)
+phraseVector = elementMat(:,1);
+u = unique(phraseVector);
 markov = zeros(length(u));
 for i = 1:length(u)
     % Choose the ith element of u;
     u(i);
-    transpose = data2';
+    transpose = phraseVector';
     % Find which slots this element occupies within the performance.
     element_indices = ismember(transpose,u(i));
     f = find(element_indices==1);
     % Get the dimensions of the matrix.
-    [height, width] = size(data2);
+    [height, width] = size(phraseVector);
     % Make special considerations for the final element.
     if(max(f)== height * width)
         f(end) = height * width - 1;
@@ -41,4 +39,4 @@ for i = 1:length(u)
     end
 end
 endElementInd = length(u);
-markov(endElementInd,endElementInd - 1:endElementInd)=[1,0];
+% markov(endElementInd,endElementInd - 1:endElementInd)=[1,0];
