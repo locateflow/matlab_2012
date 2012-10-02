@@ -44,6 +44,18 @@ load('C:\Users\Eathan\Documents\MATLAB\2012\09\PhraseMarkovMatsForAllSixBirds.ma
 inputMarkovMat = BaylissPhraseMarkov;
 elementMat = Bayliss;
 testPhraseModel = makePhraseMarkovModelFromMarkovMat(inputMarkovMat, elementMat);
+%%
+viewPhraseDistributions(Powys,'Powys')
+%%
+viewPhraseDistributions(Bayliss,'Bayliss')
+%%
+viewPhraseDistributions(Beasley,'Beasley')
+%%
+viewPhraseDistributions(HT77,'HT77')
+%%
+viewPhraseDistributions(HT99,'HT99')
+%%
+viewPhraseDistributions(Lumsdaine,'Lumsdaine')
 
 
 
