@@ -35,7 +35,15 @@ HT77PhraseMarkov = makePhraseMarkovFromElementMat(HT77);
 HT99PhraseMarkov = makePhraseMarkovFromElementMat(HT99);
 %%
 LumsdainePhraseMarkov = makePhraseMarkovFromElementMat(Lumsdaine);
+%%
+save 2012\09\PhraseMarkovMatsForAllSixBirds
+%%
 
+load('C:\Users\Eathan\Documents\MATLAB\2012\09\PhraseMarkovMatsForAllSixBirds.mat')
+%%
+inputMarkovMat = BaylissPhraseMarkov;
+elementMat = Bayliss;
+testPhraseModel = makePhraseMarkovModelFromMarkovMat(inputMarkovMat, elementMat);
 
 
 
