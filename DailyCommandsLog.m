@@ -1,72 +1,43 @@
-load('C:\Users\Eathan\Documents\MATLAB\2012\09\ElmentStructureForAllSixBirds.mat');
-%%
-% Next I modified viewElementDistributions function to
-% viewPhraseDistributions function
-%%
-viewPhraseDistributions(Powys,'Powys')
-%%
-viewPhraseDistributions(Bayliss,'Bayliss')
-%%
-viewPhraseDistributions(Beasley,'Beasley')
-%%
-viewPhraseDistributions(HT77,'HT77')
-%%
-viewPhraseDistributions(HT99,'HT99')
-%%
-viewPhraseDistributions(Lumsdaine,'Lumsdaine')
-
 %%
 
 birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys'};
 allElementFreqs = [];
 for i = 1:length(birdNames)
-    doFunctionAddExtensionToOutput('makePhraseMarkovFromElementMat', cell2mat(birdNames(i)), 'nameExtension')
+    doFunctionAddExtensionToOutput('makePhrasePoissonModelFromElementMat', cell2mat(birdNames(i)), 'nameExtension')
 end
 %%
+output = makePhrasePoissonModelFromElementMat(Bayliss);
 %%
-PowysPhraseMarkov = makePhraseMarkovFromElementMat(Powys);
+viewPhraseDistributionsToCompare(Bayliss, testPhraseModel, 'test');
 %%
-BaylissPhraseMarkov = makePhraseMarkovFromElementMat(Bayliss);
-%%
-BeasleyPhraseMarkov = makePhraseMarkovFromElementMat(Beasley);
-%%
-HT77PhraseMarkov = makePhraseMarkovFromElementMat(HT77);
-%%
-HT99PhraseMarkov = makePhraseMarkovFromElementMat(HT99);
-%%
-LumsdainePhraseMarkov = makePhraseMarkovFromElementMat(Lumsdaine);
-%%
-save 2012\09\PhraseMarkovMatsForAllSixBirds
-%%
+viewPhraseDistributionsToCompare(Bayliss, output, 'test');
 
-load('C:\Users\Eathan\Documents\MATLAB\2012\09\PhraseMarkovMatsForAllSixBirds.mat')
 %%
-inputMarkovMat = BaylissPhraseMarkov;
-elementMat = Bayliss;
-testPhraseModel = makePhraseMarkovModelFromMarkovMat(inputMarkovMat, elementMat);
+PowysPhrasePoisson = makePhrasePoissonModelFromElementMat(Powys);
 %%
-viewPhraseDistributions(Powys,'Powys')
+BaylissPhrasePoisson = makePhrasePoissonModelFromElementMat(Bayliss);
 %%
-viewPhraseDistributions(Bayliss,'Bayliss')
+BeasleyPhrasePoisson = makePhrasePoissonModelFromElementMat(Beasley);
 %%
-viewPhraseDistributions(Beasley,'Beasley')
+HT77PhrasePoisson = makePhrasePoissonModelFromElementMat(HT77);
 %%
-viewPhraseDistributions(HT77,'HT77')
+HT99PhrasePoisson = makePhrasePoissonModelFromElementMat(HT99);
 %%
-viewPhraseDistributions(HT99,'HT99')
+LumsdainePhrasePoisson = makePhrasePoissonModelFromElementMat(Lumsdaine);
 %%
-viewPhraseDistributions(Lumsdaine,'Lumsdaine')
-
-
-
-
-
-
-
-       
-    
-
-
-
+save 2012\09\PhrasePoissonModelsForAllSixBirds
+%%
+view3PhraseDistributionsToCompare(Bayliss, BaylissPhrasePoisson, BaylissPhraseMarkovModel, 'Bayliss Data', 'Bayliss Poisson Model', 'Bayliss Markov Model');
+%%
+inputMarkovMat = HT99PhraseMarkov;
+elementMat = HT99;
+HT99PhraseMarkovModel = makePhraseMarkovModelFromMarkovMat(inputMarkovMat, elementMat);
+%done for all birds.
+%%
+save 2012\09\PhraseMarkovModelsForAllSixBirds
+%%
+view3PhraseDistributionsToComparePDF(Bayliss, BaylissPhrasePoisson, BaylissPhraseMarkovModel, 'Bayliss Original Data', 'Poisson Model', 'Markov Model', 'BaylissComparePhraseModels');
+%% created another empty file and used find and replace repeatedly.
+view3PhraseDistributionsToComparePDF(HT77, HT77PhrasePoisson, HT77PhraseMarkovModel, 'HT77 Data', 'HT77 Poisson Model', 'HT77 Markov Model', 'HT77ComparePhraseModels');
 
 
