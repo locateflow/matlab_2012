@@ -1,33 +1,10 @@
-9/26/2012
+10/7/2012
+Reviewing conversation with Ofer and Lucas last Wednesday.
 
-Found the hand sorted data for Bayliss!  It was here on the 
-external hardrive with files from the old vaio laptop:
-E:\C\Users\SongBird\Documents\MATLAB\3_16_2012\Bayliss_clustered
+Lucas says to start with something simple.  Let's just look at the histogram of 
+interphrase intervals, based on phrases and based on elements.  We can pool across
+elements for one bird.  Before combining them, divide by the mean interval.
 
-I had a meeting with Ofer and Lucas.  Here are the tasks that we decided upon
-pursuing:
-
-1. Plot a histogram of inter-phrase intervals for each element.  Then compare that
-with the histogram of the IPI for each element in the model.
-
-2. We want to show that the element distribution shows more structure than the
-phrase distribution.  Make barcode plots for the phrase distributions.  Compare
-that with original data.
-
-3. Make a Markov model that takes into account phrases.  interphrase interval
-is zero when and element is used twice within a phrase.
-
-Perhaps the coefficient of variation will be lower for the elements than the 
-phrases?
-
-
-Because more regular than exponential must be a memory???
-
-Label phrases and make a transition matrix.
-
-Work on:
-
-Comparing the distribution of interphrase intervals for several elements/
-Look at a way to exhibit the full phrase reusage in the same sort of barcode plot.
+I also need to work on viewing element distributions based on phrase markov models.
 
 
