@@ -1,13 +1,3 @@
-elementMat = Bayliss;
-tit = 'Bayliss';
-
-filename = [tit, 'OriginalPhraseDistribution'];
-suffix = ' Original Element Distribution';
-tit = [tit, suffix];
-viewElementDistributionsPDF(elementMat, tit, filename)
+load('C:\Users\Eathan\Documents\MATLAB\2012\09\ElmentStructureForAllSixBirds.mat')
 %%
-inputMarkovMat = BaylissPhraseMarkov;   
-elementMat = Bayliss;
-BaylissPhraseBasedElemntModel = makePhraseMarkovElementModelFromMarkovMat(inputMarkovMat, elementMat)
-%%
-compareElementDistributions(Bayliss, phraseModel, 'test', 'Bayliss', 'PhraseBasedMarkovModel')
+viewPhraseDistributionHistogramsPDF(Powys, 'Powys - IPI Distribution', 'PowysIPIDistribution')
