@@ -1,4 +1,4 @@
-function compareElementDistributionsPDF(modelElementMat, originalElementMat, birdName, altTitle, filename)
+function compareElementDistributionsPDF(originalElementMat, modelElementMat, birdName, altTitle, filename)
 subMatModel = modelElementMat(:,2:end);
 subMatOrig = originalElementMat(:,2:end);
 u = unique(subMatModel);
@@ -11,7 +11,7 @@ for i = 1:numElements
     imagesc(viewElementsOrig*-1);colormap(bone);
 
     
-    title([birdName, 'Original Data - Element (', num2str(u(i)), ') Number ', num2str(i), ' out of ', num2str(numElements)]);
+    title([birdName, ' Original Data - Element (', num2str(u(i)), ') ', num2str(i), '/', num2str(numElements)]);
     subplot(1, 10, 5)
     imagesc(sum(viewElementsOrig, 2)*-1);
     set(gca,'ytick',[],'xtick',[])
@@ -29,7 +29,7 @@ for i = 1:numElements
     saveas(gcf, ['C:\Users\Eathan\Documents\MATLAB\2012\09\Figures\PhraseBasedModelElementDistributions\', filename, 'Element', sprintf('%02d',i), 'of', num2str(numElements), '.pdf']) 
 
     
-pause
+% pause
 end
 
 
