@@ -8,7 +8,7 @@ birdName = cell2mat(birdNames(i));
 figure
 subplot(4,1,1:2)
 a = thisStruct.phrases.original.allDiffsNormalized;
-b = thisStruct.phrases.phraseMarkovModel.allDiffsNormalized;
+b = thisStruct.elements.original.allDiffsNormalized;
 [h,p,k] = kstest2(a, b);
 t = ['h = ', num2str(h), char(10), 'p = ', num2str(p), char(10), 'k = ', num2str(k)];
 
@@ -20,8 +20,8 @@ set(gca, 'xtick', []);
 text(max(xlim)*0.5, max(ylim)*0.8, t)
 subplot(4,1,3:4)
 hist(b);
-title([birdName, char(10) ' IPI distribution (phrases, phrase markov)'])
+title([birdName, char(10) ' IPI distribution (elements, original data)'])
 
 set(gca, 'xlim', axisLim);
-saveas(gcf, ['C:\Users\Eathan\Documents\MATLAB\2012\10\Figures\kstests\', birdName, 'OrigVsPhraseMarkov_phrases.pdf']) 
+saveas(gcf, ['C:\Users\Eathan\Documents\MATLAB\2012\10\Figures\kstests\', birdName, 'PhraseVsElement.pdf']) 
 end
