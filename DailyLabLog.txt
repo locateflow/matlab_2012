@@ -1,10 +1,31 @@
-10/7/2012
-Reviewing conversation with Ofer and Lucas last Wednesday.
+Conversation with Lucas
+10/26/2012
 
-Lucas says to start with something simple.  Let's just look at the histogram of 
-interphrase intervals, based on phrases and based on elements.  We can pool across
-elements for one bird.  Before combining them, divide by the mean interval.
+try to use same bins in different histograms.
+say every .5
 
-I also need to work on viewing element distributions based on phrase markov models.
+check entropy, coeff of variance
+H = sum(p.*log(p))
 
+ipi = rand(1000,1)
 
+h = hist(ipi, 0:0.5:15)
+bar(xbin, h)
+cv = std(x)/mean(x) (coefficient of variation)
+p = h/sum(h) -> probability
+
+Get randomized markov 
+model together and do KS
+test of element distribution compared to original.
+also use original markov model.
+compare ks statistics.
+
+display entropy and coeff of variance on plots.
+
+mode of distribution moved to the right implying there
+is more regularity in the elements in 3 out of 6.
+Ofer wants to do statistics across the birds.
+
+The phrase based markov model makes the distribution
+of element IPIs move right as well.  However would
+the radomized markov model achieve this?
