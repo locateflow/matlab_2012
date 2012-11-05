@@ -1,14 +1,27 @@
-Fs = 44100;
-% t = 0:1/Fs:.3;
-% x=cos(2*pi*t*200)+randn(size(t));
-x = Bayliss(3).original
-% Hs=spectrum.periodogram;
-Hs=spectrum.eigenvector;
-
-psd(Hs,x,'Fs',Fs)
-
 %%
-% Bayliss 1 (kHz) highest peak, second highest
-% 1.38, 1.713
-% 2 - 1.414, 2.21
-% 3) 1.351, 1.55
+% Do find and "replace all" for all six birds...
+birdNames = {'BaylissIPIs', 'BeasleyIPIs', 'HT77IPIs', 'HT99IPIs', 'LumsdaineIPIs', 'PowysIPIs'};
+for i = 1:length(birdNames)
+
+eval(['thisStruct = ', (cell2mat(birdNames(i))), ';'])
+birdName = cell2mat(birdNames(i));
+figure
+subplot(4,1,1:2)
+a = thisStruct.phrases.original.allDiffsNormalized;
+b = thisStruct.phrases.phraseMarkovModel.allDiffsNormalized;
+[h,p,k] = kstest2(a, b);
+t = ['h = ', num2str(h), char(10), 'p = ', num2str(p), char(10), 'k = ', num2str(k)];
+
+hist(a);
+title([birdName, char(10) ' IPI distribution (phrases, original data)'])
+axisLim = get(gca, 'xlim');
+set(gca, 'xtick', []);
+
+text(max(xlim)*0.5, max(ylim)*0.8, t)
+subplot(4,1,3:4)
+hist(b);
+title([birdName, char(10) ' IPI distribution (phrases, phrase markov)'])
+
+set(gca, 'xlim', axisLim);
+saveas(gcf, ['C:\Users\Eathan\Documents\MATLAB\2012\10\Figures\kstests\', birdName, 'OrigVsPhraseMarkov_phrases.pdf']) 
+end
