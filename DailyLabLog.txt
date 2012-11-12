@@ -1,31 +1,47 @@
-Conversation with Lucas
-10/26/2012
+Riview of meeting with Ofer and Lucas:
+11/07/2012
 
-try to use same bins in different histograms.
-say every .5
+Write a quick abstract. Rewrite what we wrote previously.
 
-check entropy, coeff of variance
-H = sum(p.*log(p))
+Everybody looks at song types.  We see another structure.  If the bird is 
+building his songs by reusing elements.  Is he remembering phrases or elements 
+more saliently?  
 
-ipi = rand(1000,1)
 
-h = hist(ipi, 0:0.5:15)
-bar(xbin, h)
-cv = std(x)/mean(x) (coefficient of variation)
-p = h/sum(h) -> probability
+Come up with 5 figures.
+Figure 1 shows different phrases.
 
-Get randomized markov 
-model together and do KS
-test of element distribution compared to original.
-also use original markov model.
-compare ks statistics.
+The figures tell a story.
 
-display entropy and coeff of variance on plots.
+Each figure answers a question but raises the next one.
+Focus on the single message of the paper.
 
-mode of distribution moved to the right implying there
-is more regularity in the elements in 3 out of 6.
-Ofer wants to do statistics across the birds.
+Which journal will we send it to?
+    How general is our claim?
+    Who is our target audience?
+        Ornithologists?
+        Neuroscientists?
+        More general?
+    Which journal?
+        Animal Behaviour (ornithology)
+        Neuroethology (if you have ideas that are more mechanistic)
 
-The phrase based markov model makes the distribution
-of element IPIs move right as well.  However would
-the radomized markov model achieve this?
+For next time:
+    1. Read old abstract quickly and write a new one.
+    2. Put together five figures that tell a story.
+    3. Make shuffled Markov Matrices.  Compare CV.
+    4. Begin looking for other birds. (Say whether I ame optimistic we will find them.)
+        find another bird 
+    5. Try to look at how people previously study songs (maybe stupid).
+        Literature search of how people look at songs.  Ditmar Todd.
+
+aka: framework for the paper and statment about whether we can find more birds.
+
+Also, think about our collaborators.
+    David's motivation: the music.
+    Also Hollis's motivation.
+
+We are happy because we have a significant result and it's better than what we previously thought.
+
+
+    
