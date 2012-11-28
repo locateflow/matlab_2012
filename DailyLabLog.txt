@@ -1,48 +1,7 @@
-Riview of meeting with Ofer and Lucas:
-11/07/2012
+My tasks for today:
+	Find more butcherbird data.  I'm looking for
+the system of how it was done before.  I remember having
+a spreadsheet in which I kept track of comments about
+sound files.  I'm looking for that on the old computer.
 
-Write a quick abstract. Rewrite what we wrote previously.
-
-Everybody looks at song types.  We see another structure.  If the bird is 
-building his songs by reusing elements.  Is he remembering phrases or elements 
-more saliently?  
-
-
-Come up with 5 figures.
-Figure 1 shows different phrases.
-
-The figures tell a story.
-
-Each figure answers a question but raises the next one.
-Focus on the single message of the paper.
-
-Which journal will we send it to?
-    How general is our claim?
-    Who is our target audience?
-        Ornithologists?
-        Neuroscientists?
-        More general?
-    Which journal?
-        Animal Behaviour (ornithology)
-        Neuroethology (if you have ideas that are more mechanistic)
-
-For next time:
-    1. Read old abstract quickly and write a new one.
-    2. Put together five figures that tell a story.
-    3. Make shuffled Markov Matrices.  Compare CV.
-    4. Begin looking for other birds. (Say whether I ame optimistic we will find them.)
-        find another bird 
-    5. Try to look at how people previously study songs (maybe stupid).
-        Literature search of how people look at songs.  Dietmar Todt. 
-http://web.fu-berlin.de/behavioral-biology/themen/g_team/dietmar_todt_g002/dietmar_todt_g002.htm
-
-aka: framework for the paper and statment about whether we can find more birds.
-
-Also, think about our collaborators.
-    David's motivation: the music.
-    Also Hollis's motivation.
-
-We are happy because we have a significant result and it's better than what we previously thought.
-
-
-    
+Found it! 
