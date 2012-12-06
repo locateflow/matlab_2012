@@ -50,3 +50,15 @@ d3 = diff(allBirdsCVElementPhrase.phraseMarkovModel_shuffled);
 [h, p] =  ttest(diff(allBirdsCVElementPhrase.phraseMarkovModel_shuffled))
 d_all = [d1; d2; d3];
 [h, p] =  ttest(diff([diff(d_all([1,3],:));diff(d_all(1:2,:))]))
+
+%%
+
+load 2012\10\AllBirdsCVElmentPhrase
+
+plot(allBirdsCVElementPhrase.phraseMarkovModel_shuffled, '-o')
+
+xlim([0,3])
+set(gca,'xtick', [0:1:3])
+set(gca,'xticklabel', {'','elements','phrases',''})
+
+ylabel('CV')
