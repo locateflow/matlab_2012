@@ -1,10 +1,36 @@
-Today I am looking to start processing another butcherbird sound file.  
-I think I made a sheet or some notes about the process of working with
-a butcherbirds sound file.  I found some information in the google 
-spreadsheet that was used as a kind of daily log before.  Searched
-the document for powyes.  Now I am locating the butcherbird mind map from 
-the vaio computer and searching for informatiion there.
+Segmenting Johnson:  Maybe start at 1:50?
+band pass filter 800-3000 highest steepness
+ 
+Found the following notes in Daily Notes File on Google Docs:
 
-Gave up on finding that file.
+looked at Butcher BIrds map in freemind.  Used branch from Oct 14 2011 for reference.  
+opened 052.6-Powys1.  FIltered 800-3000.   Saved as mono.  
+picked out a few "silences' with other bird sounds and used as clipboard data to filter out. 
+cue points using following parameters from top to bottom: -30, .5, 3.5, 0-99 . 
+now searching for table2startalign to figure out how to process the sound files.
+
+also found:
+
+"remembered a function called getDataFromWav.m.  
+Also realized the name of file containing butcherbird functions is called functionsButcherbird.docx  
+though I can't find where it is on the computer anymore.
+Tried to run the function getDataFromWav with plowys sound files.  No luck.  
+Error message in matlab having to do with rsmooth.  
+December_6_2011 seems to be a helpful file showing what was done on previous birds.  
+Thought probelms may be because I'm using matlab 2010 .  then I tried matlab 2008."
+
+this time i did:
+cue points using following parameters from top to bottom: -30, .5, 3.5, 0-99 .
+Letters for 0, numbers for 99
+edit > cue points > show cue lines.  so easier to make fine adjustments.
+
+From Johnson I have 64 separate phrase files.
+
+Ran getDataFromWav.  Fixing things through a couple glitches.
+Moved consolidatebutcherbirdData to ButcherbirdFunctions folder.
+also added to list in 
+E:\C\Users\SongBird\Desktop\2_24_2012\Presentations\ButcherbirdResearchHist\WordFiles\functionsButcherbird
+
+Move lmax and lmin functions to the MATLAB folder of the new computer.
 
 
