@@ -1,1 +1,12 @@
-load C:\Users\Eathan\Documents\MATLAB\2011\10\10_13_2011.mat HT99
+addpath('ButcherbirdFunctions');
+Johnson1 = getDataFromWav('C:\Users\Eathan\Music\Butcherbird\Johnson')
+%%
+save 2012\12\Johnson1_data
+%%
+imageButcherbird(Johnson1, 'subsorting');
+rearrange_image_rows
+set(gca,'clim',[800 2000])
+imageButcherbird(Johnson1, 'raw');
+set(gca,'clim',[800 2000])
+
+% -saveas(gcf, ['C:\Users\Eathan\Documents\MATLAB\2012\10\Figures\kstests\', birdName, 'OrigVsPhraseMarkov_phrases.pdf'])
