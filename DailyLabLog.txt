@@ -14,3 +14,6 @@ Now I must process the data in the spreadsheet.
 
 https://github.com/locateflow/matlab_2012/blob/f1393bbd92eabbcc331b464fbeb933ab9c285a88/DailyCommandsLog.m
 
+% added Johnson Data by cut and paste to workspace.
+load('C:\Users\Eathan\Documents\MATLAB\2012\09\PhraseBasedElementMarkovModelForAllSixBirds.mat')
+save('C:\Users\Eathan\Documents\MATLAB\2012\12\2012_12_07\PhraseBasedElementMarkovModelForAllSevenBirds.mat')
