@@ -1,17 +1,16 @@
-12/7/2012
+1/11/2013
 
-Locate the rest of butcherbird data:
-2012/09/ and /10/
+using the following link for instructions on how to process latest bird.
+butcher bird.
 
-See where IPI distributions kept:
-allIPIsAllSixBirds.mat vs. IPIsAllSixBirds.mat
+https://github.com/locateflow/matlab_2012/commit/15bed3c1ee0c3ec26e9c1d799031405114c73592
 
-allIPIsAllSixBirds.mat is better - the information is organized better.
-and contains shuffled phrase markov information.
+That allowed me to process the sound files and sort the phrases.
+Then I added the phrase/element structure to the spreadsheet.
 
+https://docs.google.com/spreadsheet/ccc?key=0AhhwdgwUBL4TdHVPRndVVmQxNjFvREZPQTFVdGVtRGc#gid=9
 
-PhraseBasedElementMarkovModelForAllSixBirds.mat
-This is where the raw data from the spreadsheet goes.
+Now I must process the data in the spreadsheet.
 
-Used edit > paste to workspace to transfer Johnson1 Data.
-    
+https://github.com/locateflow/matlab_2012/blob/f1393bbd92eabbcc331b464fbeb933ab9c285a88/DailyCommandsLog.m
+
