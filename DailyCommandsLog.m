@@ -25,7 +25,9 @@ allBirdsCVElementPhrase.original(1:2,i) = [std(ele)/mean(ele); std(phr)/mean(phr
 
 end
 %%
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
 %%
+
 d1 = diff(allBirdsCVElementPhrase.original)
 [h, p] =  signtest(diff(allBirdsCVElementPhrase.original))
 %%
@@ -33,8 +35,11 @@ d1 = diff(allBirdsCVElementPhrase.original)
 %%
 
 %% Here is the code for the example
+%%
+h = 2;
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
 figure
-plot(allBirdsCVElementPhrase.original, '-o')
+plot(allBirdsCVElementPhrase.original - allBirdsCVElementPhrase.phraseRandom , '-o')
 
 xlim([0,3])
 set(gca,'xtick', [0:1:3])
