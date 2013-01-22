@@ -1,19 +1,10 @@
-1/11/2013
+I was lookoing for the spreadsheet data for each bird previously put together.
+I found that data in 2012/09/ElmentStructureForAllSixBirds
 
-using the following link for instructions on how to process latest bird.
-butcher bird.
+I added Johnson1 and Lumsdaine2 and saved a new data file with all birds in it.
+I did something similar for all the structures made from the original wav files.
+These are both saved in 2013/01/2013_01_21
 
-https://github.com/locateflow/matlab_2012/commit/15bed3c1ee0c3ec26e9c1d799031405114c73592
+I created a function to make a randomized phrase performance 1000 phrases long:
+'function phraseModel = makeRandomPhraseModelFromElementMat(elementMat)'
 
-That allowed me to process the sound files and sort the phrases.
-Then I added the phrase/element structure to the spreadsheet.
-
-https://docs.google.com/spreadsheet/ccc?key=0AhhwdgwUBL4TdHVPRndVVmQxNjFvREZPQTFVdGVtRGc#gid=9
-
-Now I must process the data in the spreadsheet.
-
-https://github.com/locateflow/matlab_2012/blob/f1393bbd92eabbcc331b464fbeb933ab9c285a88/DailyCommandsLog.m
-
-% added Johnson Data by cut and paste to workspace.
-load('C:\Users\Eathan\Documents\MATLAB\2012\09\PhraseBasedElementMarkovModelForAllSixBirds.mat')
-save('C:\Users\Eathan\Documents\MATLAB\2012\12\2012_12_07\PhraseBasedElementMarkovModelForAllSevenBirds.mat')
