@@ -1,10 +1,5 @@
-I was lookoing for the spreadsheet data for each bird previously put together.
-I found that data in 2012/09/ElmentStructureForAllSixBirds
+I made the function, makeMarkovPhraseModelFromElementMat.
 
-I added Johnson1 and Lumsdaine2 and saved a new data file with all birds in it.
-I did something similar for all the structures made from the original wav files.
-These are both saved in 2013/01/2013_01_21
+ran into some glitches with it but it seems fixable.
 
-I created a function to make a randomized phrase performance 1000 phrases long:
-'function phraseModel = makeRandomPhraseModelFromElementMat(elementMat)'
-
+1/31/13
