@@ -9,3 +9,5 @@ for i = 1:8
     eval([cell2mat(birdNames(i)), 'PM =  makeMarkovPhraseModelFromElementMat(', cell2mat(birdNames(i)), ');'])
 end
 %%
+save('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_01\MarkovPhraseModel')
+
