@@ -1,24 +1,11 @@
-addpath('C:\Users\Eathan\Documents\MATLAB\2013\01')
-
-birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
-
-for i = 8:8
-    
-    eval([cell2mat(birdNames(i)), 'Poisson = makePhrasePoissonModelFromElementMat(', cell2mat(birdNames(i)), ')'])
-
-end
-%%
-% save('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_06\poissonModels1000')
-
-%%%%%
-
-
+% load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_06\markovShuffle')
 addpath('2012\10')
 % Have to add 2012\10 to the pathf
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
 for i = 1:8
     
-eval([cell2mat(birdNames(i)), 'PoissonIPIs.elements.phraseRandom = getElementIPIs(', cell2mat(birdNames(i)), 'Poisson)']);
-eval([cell2mat(birdNames(i)), 'PoissonIPIs.phrases.phraseRandom = getPhraseIPIs(', cell2mat(birdNames(i)), 'Poisson)']);
+eval([cell2mat(birdNames(i)), 'PoissonIPIs.elements.phraseRandom = getElementIPIs(', cell2mat(birdNames(i)), 'PMshuffle)']);
+eval([cell2mat(birdNames(i)), 'PoissonIPIs.phrases.phraseRandom = getPhraseIPIs(', cell2mat(birdNames(i)), 'PMshuffle)']);
 
 end
 %%
@@ -52,6 +39,7 @@ d1 = diff(allBirdsCVElementPhrase.phraseRandom)
 %%
 
 %% Here is the code for the example
+figure
 plot(allBirdsCVElementPhrase.phraseRandom, '-o')
 
 xlim([0,3])
@@ -62,4 +50,11 @@ ylabel('CV')
 legend(birdNames);
 title(['Sign test, reject Null, p = ', num2str(h)])
 ylim([0 1])
-title('Poisson Phrase Order')
+title('Shuffled Markov Phrase Order')
+
+%%
+load('C:\Users\Eathan\Documents\MATLAB\2013\02\reloadForJustElementMats.mat')
+%%
+thisBird = Bayliss;
+r = random(size(Bayliss(:,1)));
+shuffled = sortrows(
