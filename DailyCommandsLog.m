@@ -1,60 +1,46 @@
-% load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_06\markovShuffle')
-addpath('2012\10')
-% Have to add 2012\10 to the pathf
+% load('C:\Users\Eathan\Documents\MATLAB\2013\02\reloadForJustElementMats.mat')
+load('C:\Users\Eathan\Documents\MATLAB\2013\01\2013_01_21\ElementStructureAllBirds_8.mat')
+%%
 birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
-for i = 1:8
-    
-eval([cell2mat(birdNames(i)), 'PoissonIPIs.elements.phraseRandom = getElementIPIs(', cell2mat(birdNames(i)), 'PMshuffle)']);
-eval([cell2mat(birdNames(i)), 'PoissonIPIs.phrases.phraseRandom = getPhraseIPIs(', cell2mat(birdNames(i)), 'PMshuffle)']);
+for j = 1:length(birdNames)
+
+mat = eval(cell2mat(birdNames(j)));
+% mat = Bayliss;
+len = length(mat(:, 1));
+
+
+for i = 1:100
+
+r = rand(len, 1);    
+shuffled = [r, mat];  shuffled = sortrows(shuffled, 1); shuffled = shuffled(:, 2:end);
+elementIPIs = getElementIPIs(shuffled);
+phraseIPIs = getPhraseIPIs(shuffled);
+ele = elementIPIs.allDiffsNormalized;
+phr = phraseIPIs.allDiffsNormalized;
+CVs(i,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)]
+
+end
+mnCVs = mean(CVs);
+
+
+elementIPIs = getElementIPIs(mat);
+phraseIPIs = getPhraseIPIs(mat);
+ele = elementIPIs.allDiffsNormalized;
+phr = phraseIPIs.allDiffsNormalized;
+CVsOrig(1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)];
+eval([cell2mat(birdNames(j)), 'ShuffledOrigCVs = [mean(CVs); CVsOrig]'])
+elementDiffs(j) = mnCVs(1)-CVsOrig(1);
+phraseDiffs(j) = mnCVs(2)-CVsOrig(2);
+
+
 
 end
 %%
-% after doing for all bids, saved the workspace
-% save 'C:\Users\Eathan\Documents\MATLAB\2013\01\2013_01_21\RandomizedPhrasesData_8_birds'
-%%
-%%
-%
-%
-%
-birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
-
-
-for i = 1:8
-    
-thisStruct = eval([cell2mat(birdNames(i)), 'PoissonIPIs']);
-
-ele = thisStruct.elements.phraseRandom.allDiffsNormalized;
-phr = thisStruct.phrases.phraseRandom.allDiffsNormalized;
-% I don't have to rest of the data right now but kept the format below the
-% same.
-allBirdsCVElementPhrase.phraseRandom(1:2,i) = [std(ele)/mean(ele); std(phr)/mean(phr)];
-
-end
-%%
-%%
-d1 = diff(allBirdsCVElementPhrase.phraseRandom)
-[h, p] =  signtest(diff(allBirdsCVElementPhrase.phraseRandom))
-%%
-[h, p] =  signtest(d1(1:8))
-%%
-
-%% Here is the code for the example
-figure
-plot(allBirdsCVElementPhrase.phraseRandom, '-o')
-
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','elements','phrases',''})
-
-ylabel('CV')
-legend(birdNames);
-title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([0 1])
-title('Shuffled Markov Phrase Order')
+[hEle, pEle]=ttest(elementDiffs)
+[hPhr, pPhr]=ttest(phraseDiffs)
+% save '2013\02\2013_02_13\shuffledCVcompareOrig'
 
 %%
-load('C:\Users\Eathan\Documents\MATLAB\2013\02\reloadForJustElementMats.mat')
-%%
-thisBird = Bayliss;
-r = random(size(Bayliss(:,1)));
-shuffled = sortrows(
+
+
+
