@@ -116,6 +116,25 @@ legend(birdNames);
 % title(['Sign test, reject Null, p = ', num2str(h)])
 ylim([-0.5 0.5])
 title('Phrase CV Comparison')
+%%
+% working on reshuffling repeats.
+subMat = p;
+u = unique(subMat);
+numPhrases = length(u(~isnan(u)));
+
+for i = 1:numPhrases   
+    selectElements = find(subMat == u(i));
+    diffs = diff(selectElements);
+    
+    allDiffs = [allDiffs; diffs];
+    eval(['s.eachDiffs.a', num2str(i), ' = diffs;']);
+    
+    diffs = diffs/mean(diffs);
+    eval(['s.eachDiffsNormalized.a', num2str(i), ' = diffs;']);
+    
+    allDiffsNormalized = [allDiffsNormalized; diffs];
+
+end
 
 
 
