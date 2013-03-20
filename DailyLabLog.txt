@@ -1,5 +1,10 @@
-I made the function, makeMarkovPhraseModelFromElementMat.
+3/13/2013
+I need to create a figure that flows from highest CV to lowest CV.  From 
+left to right it should proceed as follows:
+Suffled, Avoid Repeats, Markov Model, Original Data.  To the right of that 
+I want to provide data for the Permutated Markov Model to show that the CV
+for elements increases again.
 
-ran into some glitches with it but it seems fixable.
-
-1/31/13
+I should have two separate graphs: 
+on top, a graph for elements.
+on bottom a graph for phrases.

@@ -16,11 +16,27 @@ for i = 1:100
 
 r = rand(len, 1);    
 shuffled = [r, mat];  shuffled = sortrows(shuffled, 1); shuffled = shuffled(:, 2:end);
+% below this part can be commented out to do just shuffling
+shuffled(isnan(shuffled)) = -77;
+for ii = 1:100
+for k = 1:length(shuffled(:,1))-1
+    if ismember(shuffled(k,:), shuffled(k+1, :), 'rows')
+        deck = [shuffled(1:k, :); shuffled(k+2:end, :)];
+        toInsert = shuffled(k+1,:);       
+        randInsert = ceil((length(deck)*rand(1)));
+        shuffled = [deck(1:randInsert, :); toInsert; deck(randInsert+1:end,:)];
+    end
+end
+end
+shuffled(shuffled == -77) = NaN;
+% above this part can be commented out to do just shuffling
+    
+    
 elementIPIs = getElementIPIs(shuffled);
 phraseIPIs = getPhraseIPIs(shuffled);
 ele = elementIPIs.allDiffsNormalized;
 phr = phraseIPIs.allDiffsNormalized;
-CVs(i,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)]
+CVs(i,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)];
 
 end
 mnCVs = mean(CVs);
@@ -31,7 +47,7 @@ phraseIPIs = getPhraseIPIs(mat);
 ele = elementIPIs.allDiffsNormalized;
     phr = phraseIPIs.allDiffsNormalized;
 CVsOrig(1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)];
-eval([cell2mat(birdNames(j)), 'ShuffledOrigCVs = [mean(CVs); CVsOrig]'])
+eval([cell2mat(birdNames(j)), 'ShuffledOrigCVs = [mean(CVs); CVsOrig]']);
 elementCVs(j,:) = [mnCVs(1), CVsOrig(1)];
 phraseCVs(j,:) = [mnCVs(2), CVsOrig(2)];
 elementDiffs(j) = mnCVs(1)-CVsOrig(1);
@@ -45,7 +61,8 @@ subplot(121); imagesc(shuffled(:,2:end)); title([birdNames(j), ' Shuffled']);
 % figure('windowst', 'dock'); 
 subplot(122); imagesc(mat(:,2:end)); title([birdNames(j), ' Original']);
 % saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'Original'], 'pdf') 
-saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'ShuffleOriginal'], 'pdf') 
+% saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'ShuffleOriginal'], 'pdf') 
+saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'RepeatShuffleOriginal'], 'pdf') 
 
 
 
@@ -135,6 +152,28 @@ for i = 1:numPhrases
     allDiffsNormalized = [allDiffsNormalized; diffs];
 
 end
+%%
+%3/13/2013
+clear all
+load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'phraseDiffs')
+load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'elementDiffs')
+figure; plot([elementDiffs, phraseDiffs])
+figure; plot([elementDiffs; phraseDiffs])
+xlim([0,3])
+set(gca,'xtick', [0:1:3])
+set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
+ylabel('CV')
+legend(birdNames);
+% title(['Sign test, reject Null, p = ', num2str(h)])
+ylim([-0.5 0.5])
+%%
+title('Phrase CV Comparison')
+clear all
+load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_26\shuffledReinsertRepeatCVcompareOrig.mat', 'elementDiffs')
+[h, p] = ttest(elementDiffs)
+%%
+load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_26\shuffledReinsertRepeatCVcompareOrig.mat', 'phraseDiffs')
+[h, p] = ttest(phraseDiffs)
 
 
 
