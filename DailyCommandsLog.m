@@ -1,179 +1,79 @@
-% load('C:\Users\Eathan\Documents\MATLAB\2013\02\reloadForJustElementMats.mat')
-load('C:\Users\Eathan\Documents\MATLAB\2013\01\2013_01_21\ElementStructureAllBirds_8.mat')
-addpath('2012\10\Functions')
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS = zeros(4, 8);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES = zeros(4, 8);
+% markov data:
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\shuffledMarkovEtc.mat', 'allBirdsCVElementPhrase')
 %%
-birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
-for j = 1:length(birdNames)
-
-mat = eval(cell2mat(birdNames(j)));
-% needed to ignore the fist row.  didn't do that before.
-% mat = mat(:,2:end);
-% mat = Bayliss;
-len = length(mat(:, 1));
-
-
-for i = 1:100
-
-r = rand(len, 1);    
-shuffled = [r, mat];  shuffled = sortrows(shuffled, 1); shuffled = shuffled(:, 2:end);
-% below this part can be commented out to do just shuffling
-shuffled(isnan(shuffled)) = -77;
-for ii = 1:100
-for k = 1:length(shuffled(:,1))-1
-    if ismember(shuffled(k,:), shuffled(k+1, :), 'rows')
-        deck = [shuffled(1:k, :); shuffled(k+2:end, :)];
-        toInsert = shuffled(k+1,:);       
-        randInsert = ceil((length(deck)*rand(1)));
-        shuffled = [deck(1:randInsert, :); toInsert; deck(randInsert+1:end,:)];
-    end
-end
-end
-shuffled(shuffled == -77) = NaN;
-% above this part can be commented out to do just shuffling
-    
-    
-elementIPIs = getElementIPIs(shuffled);
-phraseIPIs = getPhraseIPIs(shuffled);
-ele = elementIPIs.allDiffsNormalized;
-phr = phraseIPIs.allDiffsNormalized;
-CVs(i,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)];
-
-end
-mnCVs = mean(CVs);
-
-
-elementIPIs = getElementIPIs(mat);
-phraseIPIs = getPhraseIPIs(mat);
-ele = elementIPIs.allDiffsNormalized;
-    phr = phraseIPIs.allDiffsNormalized;
-CVsOrig(1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)];
-eval([cell2mat(birdNames(j)), 'ShuffledOrigCVs = [mean(CVs); CVsOrig]']);
-elementCVs(j,:) = [mnCVs(1), CVsOrig(1)];
-phraseCVs(j,:) = [mnCVs(2), CVsOrig(2)];
-elementDiffs(j) = mnCVs(1)-CVsOrig(1);
-phraseDiffs(j) = mnCVs(2)-CVsOrig(2);
-
-figure('windowst', 'dock'); 
-subplot(121); imagesc(shuffled(:,2:end)); title([birdNames(j), ' Shuffled']);
-% saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'Shuffled'], 'pdf') 
-% saveas(gcf, [birdNames(j), 'a'], 'pdf')
-
-% figure('windowst', 'dock'); 
-subplot(122); imagesc(mat(:,2:end)); title([birdNames(j), ' Original']);
-% saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'Original'], 'pdf') 
-% saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'ShuffleOriginal'], 'pdf') 
-saveas(gcf, ['2013\02\2013_02_13\', mat2str(cell2mat(birdNames(j))), 'RepeatShuffleOriginal'], 'pdf') 
-
-
-
-end
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(3,:) = allBirdsCVElementPhrase.phraseMarkov(1,:);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(3,:) = allBirdsCVElementPhrase.phraseMarkov(2,:);
 %%
-[hEle, pEle]=ttest(elementDiffs)
-[hPhr, pPhr]=ttest(phraseDiffs)
-% save '2013\02\2013_02_13\shuffledCVcompareOrig'
-
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'BaylissShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'BeasleyShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'HT77ShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'LumsdaineShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'PowysShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'Johnson1ShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'Lumsdaine2ShuffledOrigCVs')
+load('C:\Users\Eathan\Documents\MATLAB\2012\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'HT99ShuffledOrigCVs')
 %%
+% birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson2', 'Lumsdaine2'};
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],1) = BaylissShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],2) = BeasleyShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],3) = HT77ShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],4) = HT99ShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],5) = LumsdaineShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],6) = PowysShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],7) = Johnson1ShuffledOrigCVs(:, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([1,4],8) = Lumsdaine2ShuffledOrigCVs(:, 1);
+%%
+% shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS = shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([2,2,3,4], :);
+%%
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],1) = BaylissShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],2) = BeasleyShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],3) = HT77ShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],4) = HT99ShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],5) = LumsdaineShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],6) = PowysShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],7) = Johnson1ShuffledOrigCVs(:, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES([1,4],8) = Lumsdaine2ShuffledOrigCVs(:, 2);
+%% Run March_20_2013.m to get reinsert data
+%save('C:\Users\Eathan\Documents\MATLAB\2013\03\2013_03_20\todaysDataWithReinsertRepeat.mat')
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,1) = BaylissShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,2) = BeasleyShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,3) = HT77ShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,4) = HT99ShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,5) = LumsdaineShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,6) = PowysShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,7) = Johnson1ShuffledOrigCVs(1, 1);
+shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS(2,8) = Lumsdaine2ShuffledOrigCVs(1, 1);
+%%
+% shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS = shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS([2,2,3,4], :);
+%%
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,1) = BaylissShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,2) = BeasleyShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,3) = HT77ShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,4) = HT99ShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,5) = LumsdaineShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,6) = PowysShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,7) = Johnson1ShuffledOrigCVs(1, 2);
+shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES(2,8) = Lumsdaine2ShuffledOrigCVs(1, 2);
+%%
+birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson2', 'Lumsdaine2'};
+
+plot(shuffled_AvoidRep_PhraseMarkov_Orig_ELEMENTS, '-o')
+title('elements CV')
+xlim([0, 5])
+set(gca, 'xticklabel', {'', 'Suffled', 'Avoid Repeat', 'Markov', 'Original'})
+legend(birdNames)
 figure
-plot(elementCVs', '-o')
-
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
-
-ylabel('CV')
-legend(birdNames);
-% title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([0 1])
-title('Element CV Comparison')
-
-
-figure
-plot(phraseCVs', '-o')
-
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
-
-ylabel('CV')
-legend(birdNames);
-% title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([0 1])
-title('Phrase CV Comparison')
-
+plot(shuffled_AvoidRep_PhraseMarkov_Orig_PHRASES, '-o')
+title('phrases CV')
+xlim([0, 5])
+set(gca, 'xticklabel', {'', 'Suffled', 'Avoid Repeat', 'Markov', 'Original'})
+legend(birdNames)
 %%
 
-figure
-newEleCVs = elementCVs(:,[1, 1]);
-newEleCVs = elementCVs - newEleCVs;
-plot(newEleCVs', '-o')
-
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
-
-ylabel('CV')
-legend(birdNames);
-% title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([-0.5 0.5])
-title('Element CV Comparison')
 
 
-figure
-newPhrCVs = phraseCVs(:,[1, 1]);
-newPhrCVs = phraseCVs - newPhrCVs;
-plot(newPhrCVs', '-o')
-
-
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
-
-ylabel('CV')
-legend(birdNames);
-% title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([-0.5 0.5])
-title('Phrase CV Comparison')
-%%
-% working on reshuffling repeats.
-subMat = p;
-u = unique(subMat);
-numPhrases = length(u(~isnan(u)));
-
-for i = 1:numPhrases   
-    selectElements = find(subMat == u(i));
-    diffs = diff(selectElements);
-    
-    allDiffs = [allDiffs; diffs];
-    eval(['s.eachDiffs.a', num2str(i), ' = diffs;']);
-    
-    diffs = diffs/mean(diffs);
-    eval(['s.eachDiffsNormalized.a', num2str(i), ' = diffs;']);
-    
-    allDiffsNormalized = [allDiffsNormalized; diffs];
-
-end
-%%
-%3/13/2013
-clear all
-load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'phraseDiffs')
-load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_13\shuffledCVcompareOrig.mat', 'elementDiffs')
-figure; plot([elementDiffs, phraseDiffs])
-figure; plot([elementDiffs; phraseDiffs])
-xlim([0,3])
-set(gca,'xtick', [0:1:3])
-set(gca,'xticklabel', {'','Bootstrap Shuffle','Original',''})
-ylabel('CV')
-legend(birdNames);
-% title(['Sign test, reject Null, p = ', num2str(h)])
-ylim([-0.5 0.5])
-%%
-title('Phrase CV Comparison')
-clear all
-load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_26\shuffledReinsertRepeatCVcompareOrig.mat', 'elementDiffs')
-[h, p] = ttest(elementDiffs)
-%%
-load('C:\Users\Eathan\Documents\MATLAB\2013\02\2013_02_26\shuffledReinsertRepeatCVcompareOrig.mat', 'phraseDiffs')
-[h, p] = ttest(phraseDiffs)
 
 
 
