@@ -8,3 +8,5 @@ for elements increases again.
 I should have two separate graphs: 
 on top, a graph for elements.
 on bottom a graph for phrases.
+
+for phrase markov values I went to 2013_02_26\ShuffledMarkovEtc.mat\allBirdsCVElementPhrase
