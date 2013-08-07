@@ -1,31 +1,37 @@
 addpath('ButcherbirdFunctions')
-BB095_1 = getDataFromWav('C:\Users\Eathan\Music\Butcherbird\095.1');
 %%
 imageButcherbird(BB095_1, 'subsorting')
 set(gca, 'clim', [800, 2500])
 %%
-saveas(gca, 'C:\Users\Eathan\Documents\MATLAB\2013\06\2013_06_06\BB095_1_sorted.fig')
+G = get(gca, 'Children');
+CD = get(G, 'CData');
+rule = CD(:,1);
+figure
+imagesc(CD)
+playButcherbirdRows(BB095_1, rule)
 %%
-save('C:\Users\Eathan\Documents\MATLAB\2013\06\2013_06_06\BB095_1struct')
+ylim([1 50])
+saveas(gca, 'section1.pdf')
+ylim([51 100])
+saveas(gca, 'section2.pdf')
+ylim([101 150])
+saveas(gca, 'section3.pdf')
+ylim([151 200])
+saveas(gca, 'section4.pdf')
+ylim([201 250])
+saveas(gca, 'section5.pdf')
+ylim([251 300])
+saveas(gca, 'section6.pdf')
+ylim([301 350])
+saveas(gca, 'section7.pdf')
 %%
-saveas(gca, 'C:\Users\Eathan\Documents\MATLAB\2013\06\2013_06_06\BB095_1_handsorted.fig')
+chil = get(gca, 'Children');
+cdat = get(chil, 'CData')
+empt = [];
+doublespace = 1:length(cdat(:,1));
+doublespace = doublespace*2-1;
+empty(:,doublespace)=cdat;
 %%
-uicontrol('Style', 'popup',...
-           'String', 'rearrange|listen',...
-           'Position', [20 340 100 50],...
-           'Callback', @setmap);
-    function setmap(hObj,event) %#ok<INUSD>
-        % Called when user activates popup menu 
-        val = get(hObj,'Value');
-        if val ==1
-            colormap(jet)
-        elseif val == 2
-            colormap(hsv)
-        elseif val == 3
-            colormap(hot)
-        elseif val == 4
-            colormap(cool)
-        elseif val == 5
-            colormap(gray)
-        end
-    end
+imagesc(cdat)
+
+
