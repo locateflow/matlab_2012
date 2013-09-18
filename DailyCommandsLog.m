@@ -1,37 +1,105 @@
-addpath('ButcherbirdFunctions')
+% opened handsorted_in-process_newFunctions2 from 2013_06_17
+open('C:\Users\Eathan\Documents\MATLAB\2013\06\2013_06_17\handsorted_in-process_newFunctions2.fig')
 %%
-imageButcherbird(BB095_1, 'subsorting')
-set(gca, 'clim', [800, 2500])
-%%
-G = get(gca, 'Children');
-CD = get(G, 'CData');
-rule = CD(:,1);
-figure
-imagesc(CD)
-playButcherbirdRows(BB095_1, rule)
-%%
-ylim([1 50])
-saveas(gca, 'section1.pdf')
-ylim([51 100])
-saveas(gca, 'section2.pdf')
-ylim([101 150])
-saveas(gca, 'section3.pdf')
-ylim([151 200])
-saveas(gca, 'section4.pdf')
-ylim([201 250])
-saveas(gca, 'section5.pdf')
-ylim([251 300])
-saveas(gca, 'section6.pdf')
-ylim([301 350])
-saveas(gca, 'section7.pdf')
-%%
-chil = get(gca, 'Children');
-cdat = get(chil, 'CData')
-empt = [];
-doublespace = 1:length(cdat(:,1));
-doublespace = doublespace*2-1;
-empty(:,doublespace)=cdat;
-%%
-imagesc(cdat)
+set(gca, 'clim', [1200 1500])
 
-
+%%
+set(gca, 'clim', [1300 1750])
+%%
+set(gca, 'clim', [800 2500])
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+set(gca, 'clim', [500 2500])
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+set(gca, 'clim', [400 1200])
+%%
+set(gca, 'clim', [1000 1300])
+%%
+set(gca, 'clim', [1200 1500])
+%%
+set(gca, 'clim', [700 1200])
+%%
+set(gca, 'clim', [975 1075])
+%%
+set(gca, 'clim', [950 1250])
+%%
+set(gca, 'clim', [500 1200])
+%%
+set(gca, 'clim', [1200 1400])
+%%
+set(gca, 'clim', [1300 2000])
+%%
+set(gca, 'clim', [950 1300])
+%%
+set(gca, 'clim', [1300 2400])
+%%
+set(gca, 'clim', [800 1400])
+%%
+set(gca, 'clim', [900 1450])
+%%
+set(gca, 'clim', [500 1300])
+%%
+set(gca, 'clim', [1050 1250])
+%%
+set(gca, 'clim', [1500 2500])
+%%
+set(gca, 'clim', [1800 2500])
+%%
+set(gca, 'clim', [850 1000])
+%%
+set(gca, 'clim', [1100 1300])
+%%
+set(gca, 'clim', [800 1200])
+%%
+set(gca, 'clim', [900 1150])
+%%
+set(gca, 'clim', [700 1000])
+%%
+set(gca, 'clim', [800 1300])
+%%
+set(gca, 'clim', [900 1400])
+%%
+set(gca, 'clim', [900 1200])
+%%
+set(gca, 'clim', [1100 1300])
+%%
+set(gca, 'clim', [1100 1500])
+%%
+set(gca, 'clim', [1000 2000])
+%%
+set(gca, 'clim', [1500 2000])
+%%
+set(gca, 'clim', [1100 1300])
+%%
+set(gca, 'clim', [1300 1700])
+%%
+set(gca, 'clim', [750 1250])
+%%
+set(gca, 'clim', [800 1200])
+%%
+set(gca, 'clim', [800 1200])
+%%
+set(gca, 'clim', [1500 2500])
+%%
+set(gca, 'clim', [2000 2500])
+%%
+set(gca, 'clim', [1500 2000])
+%%
+set(gca, 'clim', [1000 2000])
+%%
+set(gca, 'clim', [500 1500])
+%%
+set(gca, 'clim', [950 1200])
+%%
+set(gca, 'clim', [1150 1750])
+%%
+set(gca, 'clim', [500 1500])
+%%
+set(gca, 'clim', [1200 1350])
+%%
+set(gca, 'clim', [1000 1300])
+%%
+set(gca, 'clim', [1700 2500])
+%%
+set(gca, 'clim', [500 1200])
