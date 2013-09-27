@@ -102,8 +102,8 @@ sortedOrder(:,2) = 1:length(sortedOrder);
 save('C:\Users\Eathan\Documents\MATLAB\2013\07\BBO95_finalSpreadsheetData')
 
 %%
-        elementIPIs = getElementIPIs(BB095temp);
-        phraseIPIs = getPhraseIPIs(BB095temp);
+        elementIPIs = getElementIPIs(BB095);
+        phraseIPIs = getPhraseIPIs(BB095);
         ele = elementIPIs.allDiffsNormalized;
         phr = phraseIPIs.allDiffsNormalized;
         permuteMarkovCVs(101,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)]; 
@@ -136,7 +136,9 @@ Y = meanCVsElePhrPermuteMarkov(:, 1, 101);
     hold on
     scatter(X,Y, 40)
     xlim([0 102])
-     %% do after adding 9th bird
+%%
+meanCVsElePhrPermuteMarkov_(9, :, :) = meanCVsElePhrPermuteMarkov;
+    %% do after adding 9th bird
 
 sorted = sort(squeeze(meanCVsElePhrPermuteMarkov_(:, 1, :))');
 [a, b] = sort(squeeze(meanCVsElePhrPermuteMarkov_(:, 1, :))');
@@ -153,6 +155,47 @@ Y = meanCVsElePhrPermuteMarkov_(:, 1, 101);
      gscatter(X,Y, [1:9], 'bgrcmyk', '.')
     xlim([0 102])
    %%
-    save('C:\Users\Eathan\Documents\MATLAB\2013\09\combinedDataWitchUnfinished#9')
+    save('C:\Users\Eathan\Documents\MATLAB\2013\09\combinedDataWithFinished#9')
+    %%
+    birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2', 'BB095'};
+legend(birdNames)
+%%
+meanSorted = mean(sorted)
+figure('windowst', 'do')
+scatter(meanSorted, Y' - meanSorted)
+title('9/10 of subjects exhibit a CV below average CV.  The distance below average increases as average CV increases.')
+xlabel('Average CV if Subject"s permuted Markov matrices')
+ylabel('Subject"s CV')
+%%
+p = polyfit(meanSorted, Y' - meanSorted, 1)
+yfit = polyval(p, meanSorted);
+hold on
+plot(meanSorted, yfit)
+%%
+yresid = (Y' - meanSorted) - yfit;
+SSresid = sum(yresid.^2);
+SStotal = (length(Y)-1) * var(Y' - meanSorted);
+rsq = 1 - SSresid/SStotal;
+% rsq = 0.7203
+% with df n-2=7, critical value for p < 0.05 is 0.666
+%%
+figure('windowst', 'do');
+scatter(meanSorted, X)
+title('As average CV for permuted models increases, the chosen model"s percentile rank decreases')
+xlabel('Average CV if Subject"s permuted Markov matrices')
+ylabel('Percentile rank of subject"s CV among distribution of CVs for permuted markov models')
+
+p = polyfit(meanSorted, X', 1)
+yfit = polyval(p, meanSorted);
+hold on
+plot(meanSorted, yfit)
+yresid = X' - yfit;
+SSresid = sum(yresid.^2);
+SStotal = (length(X)-1) * var(X);
+rsq = 1 - SSresid/SStotal;
+% rsq = 0.668,
+% with df n-2 - 7, critical value for p < .05 = 0.666
+
+
 
    
