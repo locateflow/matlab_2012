@@ -196,6 +196,6 @@ rsq = 1 - SSresid/SStotal;
 % rsq = 0.668,
 % with df n-2 - 7, critical value for p < .05 = 0.666
 
-
+% does this show up on my computer?
 
    
