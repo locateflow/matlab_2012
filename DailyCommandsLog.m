@@ -5,7 +5,9 @@ load('C:\Users\Eathan\Documents\MATLAB\2013\01\2013_01_21\ElementStructureAllBir
 addpath('2012\10\Functions')
 addpath('2013\01\2013_01_21\Functions')
 
-birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
+% birdNames = {'Bayliss', 'Beasley', 'HT77', 'HT99', 'Lumsdaine', 'Powys', 'Johnson1', 'Lumsdaine2'};
+birdNames = {'BB095'};
+
 for j = 1:length(birdNames)
     mat = eval(cell2mat(birdNames(j)));
     len = length(mat(:, 1));  
@@ -81,3 +83,76 @@ subplot(133)
 %     plot(load('C:\Users\Eathan\Documents\MATLAB\2013\03\2013_03_29\CVsElePhrMarkovAndPermute.mat')
 
 % end
+
+%%
+% opened handsorted_in-process_newFunctions2 from 2013_06_17
+open('C:\Users\Eathan\Documents\MATLAB\2013\06\2013_06_17\handsorted_in-process_newFunctions2.fig')
+%%
+figChildren = get(gca, 'Children')
+%%
+cData = get(figChildren, 'cdata');
+sortedOrder = cData(:,1);
+sortedOrder(:,2) = 1:length(sortedOrder);
+% this was copied and pasted into the spreadsheet of sorted data, then it
+% was sorted based on the column the cdata was pasted into.
+%save('C:\Users\Eathan\Documents\MATLAB\2013\07\tempVars')
+%% after running multiple models (apx 25 min.)
+% save('C:\Users\Eathan\Documents\MATLAB\2013\07\tempVars2')
+% load('C:\Users\Eathan\Documents\MATLAB\2013\07\tempVars2')
+save('C:\Users\Eathan\Documents\MATLAB\2013\07\BBO95_finalSpreadsheetData')
+
+%%
+        elementIPIs = getElementIPIs(BB095temp);
+        phraseIPIs = getPhraseIPIs(BB095temp);
+        ele = elementIPIs.allDiffsNormalized;
+        phr = phraseIPIs.allDiffsNormalized;
+        permuteMarkovCVs(101,1:2) = [std(ele)/mean(ele), std(phr)/mean(phr)]; 
+        
+    mnPermuteMarkovCVs = [std(ele)/mean(ele), std(phr)/mean(phr)];
+    meanCVsElePhrPermuteMarkov(1,:,101) = mnPermuteMarkovCVs;
+%%
+    figure
+    sorted = sort(squeeze(meanCVsElePhrPermuteMarkov(:, 1, :))');
+    plot(1:101, sorted);
+    hold on
+    Y = meanCVsElePhrPermuteMarkov(:, 1, 101);
+    X = find(sorted==Y);
+    scatter(X, Y, 'o', 'linewidth', 5)
+    ylim([.3 .9])
+    title('Phrase Markov Permutation (Elements)')
+    ylabel('CV')
+    %%
+meanCVsElePhrPermuteMarkov(:,:,101) = meanCVsElePhrMarkovModel;
+sorted = sort(squeeze(meanCVsElePhrPermuteMarkov(:, 1, :))');
+[a, b] = sort(squeeze(meanCVsElePhrPermuteMarkov(:, 1, :))');
+X = find(b==101)-[0:101:707];
+Y = meanCVsElePhrPermuteMarkov(:, 1, 101);
+%%
+    clf
+    plot(1:101, sort(squeeze(meanCVsElePhrPermuteMarkov(:, 1, :))'));
+    ylim([.3 .9])
+    title('Phrase Markov Permutation (Elements)')
+    ylabel('CV')
+    hold on
+    scatter(X,Y, 40)
+    xlim([0 102])
+     %% do after adding 9th bird
+
+sorted = sort(squeeze(meanCVsElePhrPermuteMarkov_(:, 1, :))');
+[a, b] = sort(squeeze(meanCVsElePhrPermuteMarkov_(:, 1, :))');
+X = find(b==101)-[0:101:808]';
+Y = meanCVsElePhrPermuteMarkov_(:, 1, 101);
+%%
+    clf
+    plot(1:101, sort(squeeze(meanCVsElePhrPermuteMarkov_(:, 1, :))'));
+    ylim([.3 .9])
+    title('Phrase Markov Permutation (Elements)')
+    ylabel('CV')
+    hold on
+     scatter(X,Y, 60, 'ok')
+     gscatter(X,Y, [1:9], 'bgrcmyk', '.')
+    xlim([0 102])
+   %%
+    save('C:\Users\Eathan\Documents\MATLAB\2013\09\combinedDataWitchUnfinished#9')
+
+   
